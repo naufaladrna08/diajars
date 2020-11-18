@@ -32,7 +32,4 @@ export default {}
   width: 50%
 }
 
-#form {
-  
-}
 </style>
