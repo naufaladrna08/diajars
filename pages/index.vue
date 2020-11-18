@@ -31,5 +31,4 @@ export default {}
 .flex div {
   width: 50%
 }
-
 </style>
