@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="superContainer">
     <Nuxt />
   </div>
 </template>
@@ -11,18 +11,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Varela+Round&display=swap');
 //Varela round for general use, whilst Boogaloo used for app title cards
 
-$red: #EF476F;
-$yellow: #FFD166;
-$green: #06D6A0;
-$blue: #118AB2;
-$darkblue: #073B4C;
-
 *{
   box-sizing: border-box;
   margin: 0;padding: 0;
   font-family: 'Varela Round', sans-serif;
 }
 
+//optimize the height because nuxt makes the hierarchy fucking weird
+html, body, #__layout, .superContainer, #__nuxt{
+  height: 100%;
+}
+
+
+//library starts here
 .font-boogaloo{
   font-family: 'Boogaloo', cursive;
 }
