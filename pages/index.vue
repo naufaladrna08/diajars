@@ -2,11 +2,12 @@
   <div class="container">
     <div class="flex">
       <div id="illustration">
-        Left         
+        Left
       </div>
       <div id="form">
         <NuxtLink to="/login_guru"> Masuk Sebagai Guru </NuxtLink>
         <NuxtLink to="/login_murid"> Masuk Sebagai Murid </NuxtLink>
+        <a href="" class="test">asd</a>
       </div>
     </div>
   </div>
@@ -16,19 +17,6 @@
 export default {}
 </script>
 
-<style>
-.container {
-  width: 100%;
-  box-sizing: border-box;
-}
+<style lang="scss" scoped>
 
-.flex {
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-}
-
-.flex div {
-  width: 50%
-}
 </style>
