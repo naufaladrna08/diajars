@@ -1,6 +1,15 @@
 <template>
   <div class="container">
+
     <div class="apptitle font-boogaloo">DIAJARS</div>
+    <img class="signInButton"
+    draggable="false"
+    :src="require(`~/assets/image/bitmap/btn_google_signin_dark_${state}_web.png`)"
+    @click="()=>{state = 'pressed'}"
+    @mouseover="()=>{state='focus'}"
+    @mouseout="() => {state = 'normal'}"
+    >
+
     <svg width="293" height="223" viewBox="0 0 293 223" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__left">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M149.125 96.1218C176.64 94.7205 203.869 105.531 225.78 122.253C246.769 138.27 257.64 163.018 268.401 187.146C279.078 211.086 286.398 235.507 287.963 261.679C289.844 293.144 300.19 331.112 278.366 353.829C256.355 376.741 217.808 368.987 186.083 367.727C161.973 366.769 140.342 356.854 118.109 347.464C98.3607 339.122 80.2236 329.42 63.5285 315.96C43.5819 299.879 20.7606 285.409 11.49 261.506C1.22876 235.049 -2.62875 203.476 10.0588 178.096C22.6626 152.883 53.0579 144.117 77.323 129.814C100.572 116.109 122.182 97.494 149.125 96.1218Z" fill="#E6F2F4"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M-99.5916 234.028C-111.266 209.773 -118.673 181.884 -111.779 155.833C-105.26 131.196 -82.0451 116.028 -63.6812 98.3164C-47.98 83.1734 -31.0061 71.1893 -12.3268 59.9161C10.9571 45.8638 32.8729 17.3619 59.1717 24.1725C85.6707 31.035 86.9841 69.589 104.871 90.267C121.178 109.118 149.401 116.628 159.033 139.614C169.307 164.131 164.788 191.975 158.308 217.785C151.166 246.236 144.668 279.127 120.004 295.076C95.4335 310.964 63.3378 298.254 34.0935 298.107C7.09534 297.972 -20.8389 305.906 -45.1606 294.248C-70.082 282.303 -87.6161 258.91 -99.5916 234.028Z" fill="#D6EAED"/>
@@ -15,7 +24,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data(){
+    return {
+      state: 'normal'
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -27,7 +42,7 @@ export default {}
 }
 .apptitle{
   margin: auto;
-  font-size:3em;
+  font-size:4.5em;
   color: $darkblue;
 }
 .blob__right{
@@ -39,5 +54,11 @@ export default {}
   position: absolute;
   bottom: 0;
   left: 0;
+}
+.signInButton{
+  width: 191px;
+  height: 46px;
+  margin: auto;
+  margin-top: 0;
 }
 </style>
