@@ -1,7 +1,7 @@
 <template>
   <div class="button"
   :class="[bgClass,isPressed ? pressedClass : '']"
-  @click="()=>{isPressed=true;$emit('onclick')}"
+  @click="()=>{isPressed=true;$emit('buttonclick')}"
   @blur="()=>isPressed=false"
   >
     {{ buttonText }}
