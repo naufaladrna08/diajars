@@ -1,0 +1,40 @@
+.font-boogaloo{
+  font-family: 'Boogaloo', cursive;
+}
+
+//standard black color for the text
+.font-black{
+  color: #434343;
+}
+
+//standard white color for the text
+.font-white{
+  color: #f8f8f8;
+}
+
+.bg-red{
+  background-color: #EF476F;
+}
+.bg-yellow{
+  background-color: #FFD166;
+}
+.bg-green{
+  background-color: #06D6A0;
+}
+.bg-blue{
+  background-color: #118AB2;
+}
+.bg-darkblue{
+  background-color: #073B4C;
+}
+
+.blob__right{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.blob__left{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

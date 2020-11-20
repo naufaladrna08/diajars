@@ -42,23 +42,15 @@ export default {
 }
 .apptitle{
   margin: auto;
-  font-size:4.5em;
+  font-size:4.5rem;
   color: $darkblue;
 }
-.blob__right{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.blob__left{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
+
 .signInButton{
   width: 191px;
   height: 46px;
   margin: auto;
   margin-top: 0;
 }
+
 </style>
