@@ -8,7 +8,9 @@
 
     </div>
     <div class="rightSide">
+      <div class="form">
 
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +29,7 @@ export default {
   }
   .leftSide{
     width: 50%;
+    display: flex;
   }
   .rightSide{
     width: 50%;

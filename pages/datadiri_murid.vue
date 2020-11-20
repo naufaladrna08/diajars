@@ -6,10 +6,12 @@
       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1504 35.2114C38.4509 30.1426 67.942 24.4862 86.5731 40.9021C105.254 57.3613 98.0167 87.5834 101.57 112.237C104.405 131.905 112.092 151.634 105.222 170.279C98.4764 188.586 79.3072 197.513 65.1909 210.972C48.1753 227.195 36.9217 251.294 14.1504 257.11C-10.8811 263.503 -40.2576 259.504 -60.1235 242.976C-79.6625 226.72 -80.8903 198.194 -86.4811 173.388C-91.5161 151.048 -100.187 127.432 -90.8807 106.51C-81.8581 86.2248 -57.5842 79.6058 -39.2233 67.1419C-21.6392 55.2053 -6.65006 39.5502 14.1504 35.2114Z" fill="#FEB662"/>
       </svg>
 
+      <div class="form">
+        <Input placeholder="Nama" />
+      </div>
 
     </div>
     <div class="rightSide">
-
     </div>
   </div>
 </template>
@@ -17,7 +19,10 @@
 
 <script>
 export default {
-
+  data(){
+    return {
+    }
+  }
 }
 </script>
 
@@ -28,10 +33,15 @@ export default {
   }
   .leftSide{
     width: 50%;
+    height: 100%;
+    display: flex;
   }
   .rightSide{
     width: 50%;
     background: #fff;
     border-bottom-left-radius: 2rem;
+  }
+  .form{
+    margin: auto;
   }
 </style>
