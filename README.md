@@ -1,6 +1,6 @@
 # Diajars Project
 <p>
-  ![alt](https://cdn.discordapp.com/attachments/773935571282034732/779617461619523624/Login.png)
+  <img alt="Diajars" width="350" src="https://cdn.discordapp.com/attachments/773935571282034732/779617461619523624/Login.png">
 </p>
 
 ## Team:
