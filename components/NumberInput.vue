@@ -18,7 +18,19 @@ export default {
 
   data(){
     return {
-      inputData: null
+      rawInputData: null
+    }
+  },
+
+  computed:{
+    inputData:{
+      set(val){
+        this.rawInputData = val
+      },
+      get(){
+        if(this.rawInputData == 0)return null;
+        return Math.abs(this.rawInputData)
+      }
     }
   },
 
