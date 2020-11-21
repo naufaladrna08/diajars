@@ -13,6 +13,11 @@
 
         <NumberInput placeholder="Umur" :inputData.sync="form.umur" class="separate"/>
         <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
+        <Input placeholder="ID Kelas"
+        type="text"
+        iconName="school"
+        :inputData.sync="form.idKelas" style="width: 100%"/>
+        <Button bg="red" @buttonClick="mulaiBelajar" class="mulaiBelajarButton">Mulai Belajar</Button>
       </div>
 
     </div>
@@ -29,14 +34,15 @@ export default {
       form: {
         nama:'',
         umur: '',
-        gender: ''
+        gender: '',
+        idKelas: ''
       },
       arr: ['Laki-laki','Perempuan']
     }
   },
   methods: {
-    inputhandle(e){
-      console.log(e)
+    mulaiBelajar(){
+      //action here
     }
   }
 }
@@ -61,10 +67,15 @@ export default {
     margin: auto;
     display: flex;
     flex-direction: row;
-    // width: 200px;
+    width: 60%;
     flex-wrap: wrap;
   }
   .separate{
     width: calc(50% - 1rem);
+  }
+
+  .mulaiBelajarButton{
+    margin: .5rem;
+    width: 100%;
   }
 </style>

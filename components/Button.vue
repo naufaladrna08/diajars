@@ -4,7 +4,7 @@
   @click="clickHandler"
   @blur="()=>isPressed=false"
   >
-    {{ buttonText }}
+    <slot></slot>
   </div>
 </template>
 
@@ -36,6 +36,7 @@ export default {
   border-radius: 1.5rem;
   padding: .7rem 2rem;
   font-size: .75rem;
+  text-align: center;
 
   &__red{
     @extend .font-white;

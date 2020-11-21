@@ -26,12 +26,21 @@ export default {
   computed:{
     inputData:{
       set(val){
-        this.rawInputData = parseInt(val)
+        if(!val){
+          this.rawInputData = ''
+        }else{
+
+          this.rawInputData = parseInt(val)
+        }
       },
       get(){
-        //bac
-        if(this.rawInputData == 0)return null;
-        return Math.abs(this.rawInputData)
+        if(!this.rawInputData){
+          this.rawInputData = ''
+          return this.rawInputData;
+        }else{
+
+          return Math.abs(this.rawInputData)
+        }
       }
     }
   },

@@ -34,6 +34,7 @@ export default {
   methods: {
     select(options){
       this.value = options
+      this.isOpen = false
       this.$emit('update:inputData',this.value)
     }
   }
