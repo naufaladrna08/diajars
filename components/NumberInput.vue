@@ -1,8 +1,9 @@
 <template>
   <div class="input">
-    <input class="inputField" type="number"
+    <input class="inputField font-black" type="number"
     :placeholder="placeholder"
     v-model="inputData"
+    @input="inputChange"
     min="1"
     >
     <i class="material-icons increase" @click="increase">expand_less</i>
@@ -25,9 +26,10 @@ export default {
   computed:{
     inputData:{
       set(val){
-        this.rawInputData = val
+        this.rawInputData = parseInt(val)
       },
       get(){
+        //bac
         if(this.rawInputData == 0)return null;
         return Math.abs(this.rawInputData)
       }
@@ -37,9 +39,19 @@ export default {
   methods:{
     increase(){
       this.inputData++
+      this.emitEvent()
     },
     decrease(){
-      if(this.inputData > 1)this.inputData--
+      if(this.inputData > 1){
+        this.inputData--
+        this.emitEvent()
+      }
+    },
+    inputChange(){
+      this.emitEvent()
+    },
+    emitEvent(){
+      this.$emit('update:inputData',this.rawInputData)
     }
   }
 }

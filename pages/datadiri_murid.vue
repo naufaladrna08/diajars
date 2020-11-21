@@ -9,10 +9,10 @@
       <div class="form">
         <Input placeholder="Nama"
         type="text"
-        :inputData.sync="nama" style="width: 100%"/>
+        :inputData.sync="form.nama" style="width: 100%"/>
 
-        <NumberInput placeholder="Umur" class="umurField"/>
-        <NumberInput placeholder="Umur" class="umurField"/>
+        <NumberInput placeholder="Umur" :inputData.sync="form.umur" class="separate"/>
+        <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
       </div>
 
     </div>
@@ -26,7 +26,12 @@
 export default {
   data(){
     return {
-      nama: ''
+      form: {
+        nama:'',
+        umur: '',
+        gender: ''
+      },
+      arr: ['Laki-laki','Perempuan']
     }
   },
   methods: {
@@ -56,10 +61,10 @@ export default {
     margin: auto;
     display: flex;
     flex-direction: row;
-    width: 200px;
+    // width: 200px;
     flex-wrap: wrap;
   }
-  .umurField{
+  .separate{
     width: calc(50% - 1rem);
   }
 </style>
