@@ -30,5 +30,13 @@ html, body, #__layout, .superContainer, #__nuxt{
 }
 
 
-
+input[type="number"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 </style>

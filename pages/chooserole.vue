@@ -6,8 +6,8 @@
 
     <div class="rightSide">
       <div class="buttonContainer">
-        <Button button-text="Masuk sebagai murid" bg="red" v-on:buttonclick="loginAsMurid"/>
-        <Button button-text="Masuk sebagai guru" bg="yellow" v-on:buttonclick="loginAsGuru"/>
+        <Button button-text="Masuk sebagai murid" bg="red" @buttonClick="loginAsMurid"/>
+        <Button button-text="Masuk sebagai guru" bg="yellow" @buttonClick="loginAsGuru"/>
       </div>
       <svg width="328" height="194" viewBox="0 0 328 194" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__right">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M256.929 304.38C241.442 334.418 231.969 373.616 199.593 383.274C166.014 393.292 124.329 378.594 104.157 349.955C85.9665 324.128 117.609 290.218 112.132 259.097C106.721 228.356 60.1954 205.686 73.8202 177.59C86.9874 150.438 129.545 165.958 159.398 161.63C187.253 157.591 215.649 139.741 240.211 153.468C265.841 167.792 276.082 199.456 279.317 228.651C282.329 255.842 269.47 280.057 256.929 304.38Z" fill="#1BC89B"/>

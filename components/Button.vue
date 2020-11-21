@@ -1,7 +1,7 @@
 <template>
   <div class="button"
   :class="[bgClass,isPressed ? pressedClass : '']"
-  @click="()=>{isPressed=true;$emit('buttonclick')}"
+  @click="clickHandler"
   @blur="()=>isPressed=false"
   >
     {{ buttonText }}
@@ -12,11 +12,19 @@
 export default {
   props: ['buttonText',
           'bg'],
+
   data(){
     return {
       isPressed: false,
       bgClass: 'button__'+ this.bg,
       pressedClass: 'button__' + this.bg + '__pressed',
+    }
+  },
+
+  methods: {
+    clickHandler(){
+      this.isPressed=true
+      this.$emit('buttonClick')
     }
   }
 }

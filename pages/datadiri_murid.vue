@@ -7,7 +7,12 @@
       </svg>
 
       <div class="form">
-        <Input placeholder="Nama" />
+        <Input placeholder="Nama"
+        type="text"
+        :inputData.sync="nama" style="width: 100%"/>
+
+        <NumberInput placeholder="Umur" class="umurField"/>
+        <NumberInput placeholder="Umur" class="umurField"/>
       </div>
 
     </div>
@@ -21,6 +26,12 @@
 export default {
   data(){
     return {
+      nama: ''
+    }
+  },
+  methods: {
+    inputhandle(e){
+      console.log(e)
     }
   }
 }
@@ -43,5 +54,12 @@ export default {
   }
   .form{
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    flex-wrap: wrap;
+  }
+  .umurField{
+    width: calc(50% - 1rem);
   }
 </style>
