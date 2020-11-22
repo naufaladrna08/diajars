@@ -6,11 +6,23 @@
       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1502 35.2114C38.4507 30.1426 67.9418 24.4862 86.5729 40.9021C105.253 57.3613 98.0165 87.5834 101.57 112.237C104.405 131.905 112.091 151.634 105.222 170.279C98.4762 188.586 79.3071 197.513 65.1907 210.972C48.1751 227.195 36.9215 251.294 14.1502 257.11C-10.8813 263.503 -40.2578 259.504 -60.1237 242.976C-79.6627 226.72 -80.8904 198.194 -86.4813 173.388C-91.5163 151.048 -100.187 127.432 -90.8809 106.51C-81.8583 86.2248 -57.5844 79.6058 -39.2235 67.1419C-21.6394 55.2053 -6.65025 39.5502 14.1502 35.2114Z" fill="#DE1F4D"/>
       </svg>
 
+
+      <div class="form">
+        <Input placeholder="Nama"
+        type="text"
+        :inputData.sync="form.nama" style="width: 100%"/>
+
+        <NumberInput placeholder="Umur" :inputData.sync="form.umur" class="separate"/>
+        <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
+        <Input placeholder="Nama Kelas"
+        type="text"
+        iconName="school"
+        :inputData.sync="form.namaKelas" style="width: 100%"/>
+        <Button bg="yellow" @buttonClick="mulaiMengajar" class="mulaiMengajarButton">Mulai Mengajar</Button>
+      </div>
+
     </div>
     <div class="rightSide">
-      <div class="form">
-
-      </div>
     </div>
   </div>
 </template>
@@ -18,7 +30,22 @@
 
 <script>
 export default {
-
+  data(){
+    return {
+      form: {
+        nama:'',
+        umur: '',
+        gender: '',
+        namaKelas: ''
+      },
+      arr: ['Laki-laki','Perempuan']
+    }
+  },
+  methods: {
+    mulaiMengajar(){
+      //action here
+    }
+  }
 }
 </script>
 
@@ -29,11 +56,27 @@ export default {
   }
   .leftSide{
     width: 50%;
+    height: 100%;
     display: flex;
   }
   .rightSide{
     width: 50%;
     background: #fff;
     border-bottom-left-radius: 2rem;
+  }
+  .form{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    flex-wrap: wrap;
+  }
+  .separate{
+    width: calc(50% - 1rem);
+  }
+
+  .mulaiMengajarButton{
+    margin: .5rem;
+    width: 100%;
   }
 </style>
