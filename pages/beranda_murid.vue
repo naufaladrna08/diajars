@@ -1,7 +1,7 @@
 <template>
   <div class="container bg-red">
     <div class="taskbar">
-      <div class="addTask" @click="() => contextIsOpen = true">
+      <div class="addTask">
         <i class="material-icons">add</i>
       </div>
       <div class="task"></div>
@@ -30,20 +30,6 @@
     <path d="M13 15V12H6V8H13V5L18 10L13 15ZM11 0C11.5304 0 12.0391 0.210714 12.4142 0.585786C12.7893 0.960859 13 1.46957 13 2V4H11V2H2V18H11V16H13V18C13 18.5304 12.7893 19.0391 12.4142 19.4142C12.0391 19.7893 11.5304 20 11 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H11Z" :fill="[taskbarIsOpen?'#fff':'#434343']"/>
     </svg>
 
-    <div class="context" v-if="contextIsOpen">
-      <div class="blur" @click="() => contextIsOpen = false"></div>
-
-      <div class="contextMenu bg-green">
-        <svg width="121" height="108" viewBox="0 0 121 108" fill="none" class="blob__left" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.995 108L18 108C8.05888 108 0 99.9411 0 90L0 21.7694C1.17016 21.0134 2.32814 20.2502 3.46484 19.4734C6.13958 17.6453 8.79376 15.6087 11.4628 13.5607C20.9367 6.291 30.5974 -1.12201 42.0281 0.141639C50.5902 1.08816 56.1353 7.80593 61.8186 14.6911C65.7502 19.4542 69.748 24.2975 74.8565 27.3656C80.4928 30.7506 87.8112 32.0606 94.9617 33.3405C106.213 35.3545 117.049 37.2941 120.262 47.1272C123.408 56.7573 115.951 64.4996 108.186 72.5627C102.99 77.9573 97.6564 83.4954 95.2671 89.8385C93.1313 95.5088 92.9788 101.77 92.995 108Z" fill="#00C491"/></svg>
-
-      </div>
-      <div class="contextMenu bg-yellow">
-        <svg width="99" height="99" viewBox="0 0 99 99" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__right"><path fill-rule="evenodd" clip-rule="evenodd" d="M99 4.28351L99 81C99 90.9411 90.9411 99 81 99L0.556617 99C0.441699 98.5481 0.341397 98.0874 0.256331 97.6176C-1.37609 88.6025 5.06571 81.643 11.7128 74.4618C16.7992 68.9667 22.0058 63.3417 23.8068 56.5664C25.7415 49.2882 23.9442 41.017 22.1962 32.9725C19.7954 21.9233 17.4874 11.3018 25.0702 4.2687C33.0394 -3.12272 44.0833 0.551417 55.4726 4.34043C62.1055 6.54708 68.8555 8.7927 75.1835 8.91423C81.3867 9.03337 87.8952 7.26831 94.3018 5.5309C95.876 5.10398 97.4441 4.67873 99 4.28351Z" fill="#F7BE3A"/></svg>
-
-
-      </div>
-    </div>
-
   </div>
 </template>
 
@@ -51,31 +37,13 @@
 export default {
   data(){
     return {
-      taskbarIsOpen: false,
-      contextIsOpen: false
+      taskbarIsOpen: false
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .context{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-
-    .contextMenu{
-      position: relative;
-      width: 13rem;
-      border-radius: 1.5rem;
-      height: calc(100% - 4rem);
-      z-index: 5;
-      margin: auto;
-    }
-  }
   .container{
     display: flex;
     height: 100%;
@@ -140,18 +108,4 @@ export default {
     margin: .5rem;
     border-radius: .5rem;
   }
-
-  .blur{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    top: 0px;
-    z-index: 4;
-
-    background: #4444441a;
-    backdrop-filter: blur(6px);
-  }
-
-
 </style>
