@@ -16,7 +16,7 @@
     <path d="M13 15V12H6V8H13V5L18 10L13 15ZM11 0C11.5304 0 12.0391 0.210714 12.4142 0.585786C12.7893 0.960859 13 1.46957 13 2V4H11V2H2V18H11V16H13V18C13 18.5304 12.7893 19.0391 12.4142 19.4142C12.0391 19.7893 11.5304 20 11 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H11Z" :fill="[taskbarIsOpen?'#fff':'#434343']"/>
     </svg>
 
-    <div class="context" v-if="(contextIsOpen && !contextMateriIsOpen) || (contextIsOpen && !contextLatihanIsOpen)">
+    <div class="context" v-show="(contextIsOpen && !contextMateriIsOpen) || (contextIsOpen && !contextLatihanIsOpen)">
       <div class="blur" @click="() => contextIsOpen = false"></div>
 
       <div class="contextMenu bg-green" @click="() => {
@@ -40,13 +40,11 @@
         contextIsOpen = true
         }"></div>
 
-        <div class="materiContextMenu"></div>
-        <div class="materiContextMenu"></div>
-        <div class="materiContextMenu"></div>
-        <div class="materiContextMenu"></div>
-        <div class="materiContextMenu"></div>
-        <div class="materiContextMenu"></div>
-
+        <carousel :perPage="1" :paginationEnabled="false">
+          <slide>
+            <div class="materiContextMenu"></div>
+          </slide>
+        </carousel>
     </div>
 
     <div class="latihanContext" v-show="!contextIsOpen && contextLatihanIsOpen">
@@ -55,12 +53,11 @@
         contextIsOpen = true
         }"></div>
 
-        <div class="latihanContextMenu"></div>
-        <div class="latihanContextMenu"></div>
-        <div class="latihanContextMenu"></div>
-        <div class="latihanContextMenu"></div>
-        <div class="latihanContextMenu"></div>
-        <div class="latihanContextMenu"></div>
+        <carousel :perPage="1" :paginationEnabled="false">
+          <slide>
+            <div class="latihanContextMenu"></div>
+          </slide>
+        </carousel>
 
     </div>
 
@@ -107,34 +104,39 @@ export default {
     left: 0;
     height: 100%;
     width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
+  .VueCarousel{
+    z-index: 7;
+    flex: auto
+  }
   .materiContext{
     @extend #subContext;
     .materiContextMenu{
-      display: inline-block;
       position: relative;
       @extend .bg-green;
-      width: 1000px;
-      height: 80%;
+      width: 80%;
+      height: 80vh;
+      margin: auto;
       border-radius: 1.2rem;
-      z-index: 7;
+      z-index: 70;
     }
   }
 
   .latihanContext{
     @extend #subContext;
     .latihanContextMenu{
-      display: inline-block;
       position: relative;
       @extend .bg-yellow;
-      width: 1000px;
-      height: 80%;
+      width: 80%;
+      height: 80vh;
+      margin: auto;
       border-radius: 1.2rem;
-      z-index: 7;
+      z-index: 70;
     }
   }
 
@@ -204,7 +206,7 @@ export default {
   }
 
   .blur{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     left: 0px;
