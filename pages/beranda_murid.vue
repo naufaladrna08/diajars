@@ -1,6 +1,20 @@
 <template>
-  <div class="container bg-yellow">
+  <div class="container bg-red">
     <div class="taskbar">
+      <div class="addTask">
+        <i class="material-icons">add</i>
+      </div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
+      <div class="task"></div>
       <div class="task"></div>
       <div class="task"></div>
       <div class="task"></div>
@@ -9,11 +23,11 @@
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
-      <img :src="require('~/assets/image/vector/Indonesia_y.svg')" class="map"  @click="() => taskbarIsOpen = true" fill="#fff">
+      <img :src="require('~/assets/image/vector/Indonesia.svg')" class="map"  @click="() => taskbarIsOpen = true">
     </div>
 
     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout">
-    <path d="M13 15V12H6V8H13V5L18 10L13 15ZM11 0C11.5304 0 12.0391 0.210714 12.4142 0.585786C12.7893 0.960859 13 1.46957 13 2V4H11V2H2V18H11V16H13V18C13 18.5304 12.7893 19.0391 12.4142 19.4142C12.0391 19.7893 11.5304 20 11 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H11Z" fill="#434343"/>
+    <path d="M13 15V12H6V8H13V5L18 10L13 15ZM11 0C11.5304 0 12.0391 0.210714 12.4142 0.585786C12.7893 0.960859 13 1.46957 13 2V4H11V2H2V18H11V16H13V18C13 18.5304 12.7893 19.0391 12.4142 19.4142C12.0391 19.7893 11.5304 20 11 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H11Z" :fill="[taskbarIsOpen?'#fff':'#434343']"/>
     </svg>
 
   </div>
@@ -72,6 +86,19 @@ export default {
   .taskbarOpen{
     width: calc(100% - 3rem);
     border-bottom-left-radius: 2rem;
+  }
+
+  .addTask{
+    width: 2rem;
+    height: 2rem;
+    margin: .5rem;
+    display: flex;
+    background: #ffffff6e;
+    border-radius: .5rem;
+    .material-icons{
+      color: #fff;
+      margin: auto;
+    }
   }
 
   .task{
