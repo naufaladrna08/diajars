@@ -1,12 +1,14 @@
 <template>
   <div class="container">
 
-    <img class="apptitle" :src="require('~/assets/image/vector/logo.svg')">
-
-    <Button
-    class="startButton"
-    @click="start" :bg="'red'"
-    >Mulai</Button>
+    <div class="apptitle font-boogaloo">DIAJARS</div>
+    <img class="signInButton"
+    draggable="false"
+    :src="require(`~/assets/image/bitmap/btn_google_signin_dark_${state}_web.png`)"
+    @click="()=>{state = 'pressed'}"
+    @mouseover="()=>{state='focus'}"
+    @mouseout="() => {state = 'normal'}"
+    >
 
     <svg width="293" height="223" viewBox="0 0 293 223" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__left">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M149.125 96.1218C176.64 94.7205 203.869 105.531 225.78 122.253C246.769 138.27 257.64 163.018 268.401 187.146C279.078 211.086 286.398 235.507 287.963 261.679C289.844 293.144 300.19 331.112 278.366 353.829C256.355 376.741 217.808 368.987 186.083 367.727C161.973 366.769 140.342 356.854 118.109 347.464C98.3607 339.122 80.2236 329.42 63.5285 315.96C43.5819 299.879 20.7606 285.409 11.49 261.506C1.22876 235.049 -2.62875 203.476 10.0588 178.096C22.6626 152.883 53.0579 144.117 77.323 129.814C100.572 116.109 122.182 97.494 149.125 96.1218Z" fill="#E6F2F4"/>
@@ -22,10 +24,7 @@
 </template>
 
 <script>
-import Button from "../components/Button.vue"
-
 export default {
-  components: { Button },
   data(){
     return {
       state: 'normal'
@@ -43,10 +42,13 @@ export default {
 }
 .apptitle{
   margin: auto;
-  height: 50%;
+  font-size:4.5rem;
+  color: $darkblue;
 }
 
-.startButton{
+.signInButton{
+  width: 191px;
+  height: 46px;
   margin: auto;
   margin-top: 0;
 }
