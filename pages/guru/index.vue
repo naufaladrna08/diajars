@@ -9,6 +9,15 @@
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
+
+      <div class="upgrade" @click="onUpgradeButtonClicked">
+        <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+        </svg>
+        <p>
+        Upgrade kelas
+        </p>
+      </div>
       <img :src="require('~/assets/image/vector/Indonesia.svg')" class="map"  @click="() => taskbarIsOpen = true">
     </div>
 
@@ -75,6 +84,13 @@ export default {
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
     }
+  },
+  methods:{
+    onUpgradeButtonClicked(){
+      //TODO : Check if the class is already premium
+
+      this.$router.push('/upgrade_class')
+    }
   }
 }
 </script>
@@ -95,6 +111,25 @@ export default {
       height: calc(100% - 4rem);
       z-index: 5;
       margin: auto;
+    }
+  }
+
+  .upgrade{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: .75rem;
+    padding: .2rem .5rem;
+    border-radius: 100px;
+    background: $yellow;
+    display: flex;
+
+    *{
+      margin: auto 0;
+    }
+
+    svg{
+      margin-right: .3rem;
     }
   }
 

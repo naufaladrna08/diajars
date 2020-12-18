@@ -69,6 +69,9 @@ export default {
     flex-direction: row;
     width: 60%;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+
   }
   .separate{
     width: calc(50% - 1rem);

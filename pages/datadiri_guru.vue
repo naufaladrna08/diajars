@@ -18,6 +18,10 @@
         type="text"
         iconName="school"
         :inputData.sync="form.namaKelas" style="width: 100%"/>
+        <Dropdown placeholder="Jenis kelas"
+        :inputData.sync="form.jenis_kelas"
+        style="width: 100%"
+        :item="['A','B']"/>
         <Button bg="yellow" @buttonClick="mulaiMengajar" class="mulaiMengajarButton">Mulai Mengajar</Button>
       </div>
 
@@ -36,7 +40,8 @@ export default {
         nama:'',
         umur: '',
         gender: '',
-        namaKelas: ''
+        namaKelas: '',
+        jenisKelas: ''
       },
       arr: ['Laki-laki','Perempuan']
     }
@@ -65,11 +70,13 @@ export default {
     border-bottom-left-radius: 2rem;
   }
   .form{
+    position: relative;
     margin: auto;
     display: flex;
     flex-direction: row;
     width: 60%;
     flex-wrap: wrap;
+    z-index: 1;
   }
   .separate{
     width: calc(50% - 1rem);
