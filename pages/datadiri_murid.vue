@@ -13,10 +13,10 @@
 
         <NumberInput placeholder="Umur" :inputData.sync="form.umur" class="separate"/>
         <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
-        <Input placeholder="ID Kelas"
+        <Input placeholder="Kode Kelas"
         type="text"
         iconName="school"
-        :inputData.sync="form.idKelas" style="width: 100%"/>
+        :inputData.sync="form.kodeKelas" style="width: 100%"/>
         <Button bg="red" @buttonClick="mulaiBelajar" class="mulaiBelajarButton">Mulai Belajar</Button>
       </div>
 
@@ -35,7 +35,7 @@ export default {
         nama:'',
         umur: '',
         gender: '',
-        idKelas: ''
+        kodeKelas: ''
       },
       arr: ['Laki-laki','Perempuan']
     }

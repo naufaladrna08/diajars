@@ -14,7 +14,7 @@
   box-sizing: border-box;
   margin: 0;padding: 0;
   font-family: 'Varela Round', sans-serif;
-  transition: all .1s ease-in-out;
+  transition: all .5s ease-in-out;
   outline: none;
    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

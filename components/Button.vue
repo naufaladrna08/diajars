@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 
 .button{
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   padding: .7rem 2rem;
   font-size: .75rem;
   text-align: center;
@@ -45,6 +45,17 @@ export default {
     &__pressed{
       background: $red;
       box-shadow: 0 0 0 0 #C63E5E;
+      transform: translateY(3px);
+    }
+
+  }
+  &__white{
+    @extend .font-black;
+    background: #fff;
+    box-shadow: 0 3px 0 0 #c0c0c0;
+    &__pressed{
+      background: #fff;
+      box-shadow: 0 0 0 0 #c0c0c0;
       transform: translateY(3px);
     }
 
