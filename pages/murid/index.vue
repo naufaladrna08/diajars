@@ -7,6 +7,7 @@
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
+      <i class="material-icons insight" @click="() => $router.push('/murid/statistik')">insights</i>
       <img :src="require('~/assets/image/vector/Indonesia-y.svg')" class="map"  @click="() => taskbarIsOpen = true">
     </div>
 
@@ -78,5 +79,12 @@ export default {
     background: white;
     margin: .5rem;
     border-radius: .5rem;
+  }
+
+  .insight{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: #434343;
   }
 </style>

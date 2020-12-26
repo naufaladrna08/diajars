@@ -2,7 +2,7 @@
   <!-- //TODO : Data individual siswa -->
   <div class="container bg-red">
     <div class="infoSiswa">
-      <Button bg="white" class="back_button" v-on:buttonClick="() => $router.push('/guru/murid')" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
+      <Button bg="white" class="back_button" v-on:buttonClick="() => $router.push('/murid')" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
     </div>
     <div class="chartContainer">
       Perkembangan siswa

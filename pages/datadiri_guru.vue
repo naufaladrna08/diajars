@@ -27,6 +27,10 @@
 
     </div>
     <div class="rightSide">
+      <img v-if="url" :src="url">
+      <label for="upload-photo" class="upload-button">{{ url? 'Ganti foto':'Upload foto' }}</label>
+      <input type="file" id="upload-photo" @change="onFileChange" accept="image/*">
+
     </div>
   </div>
 </template>
@@ -36,6 +40,7 @@
 export default {
   data(){
     return {
+      url:null,
       form: {
         nama:'',
         umur: '',
@@ -49,12 +54,49 @@ export default {
   methods: {
     mulaiMengajar(){
       //action here
+    },
+    onFileChange(e) {
+      const file = e.target.files[0];
+      try {
+        this.url = URL.createObjectURL(file);
+      } catch (error) {
+
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
+label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+.upload-button{
+  @extend .font-white;
+  border-radius: 1.25rem;
+  position: relative;
+  z-index: 2;
+  padding: .7rem 2rem;
+  font-size: .75rem;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 4rem;
+  background: $red;
+  box-shadow: 0 3px 0 0 #C63E5E;
+  &__pressed{
+    background: $red;
+    box-shadow: 0 0 0 0 #C63E5E;
+    transform: translateY(3px);
+  }
+
+}
+#upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
   .container{
     display: flex;
     height: 100%;
@@ -67,7 +109,17 @@ export default {
   .rightSide{
     width: 50%;
     background: #fff;
+    display: flex;
+    overflow: hidden;
     border-bottom-left-radius: 2rem;
+    position: relative;
+    img{
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+    }
   }
   .form{
     position: relative;

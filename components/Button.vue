@@ -1,6 +1,6 @@
 <template>
   <div class="button"
-  :class="[bgClass,isPressed ? pressedClass : '']"
+  :class="[bgClass,isPressed ? pressedClass : '',{noShadow:noShadow}]"
   @click="clickHandler"
   @blur="()=>isPressed=false"
   >
@@ -11,7 +11,8 @@
 <script>
 export default {
   props: ['buttonText',
-          'bg'],
+          'bg',
+          'noShadow'],
 
   data(){
     return {
@@ -31,7 +32,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.noShadow{
+  box-shadow: none !important;
+  &_pressed{
+    transform: translateY(0) !important;
+  }
+}
 .button{
   border-radius: 1.25rem;
   padding: .7rem 2rem;
@@ -56,7 +62,6 @@ export default {
     &__pressed{
       background: #fff;
       box-shadow: 0 0 0 0 #c0c0c0;
-      transform: translateY(3px);
     }
 
   }

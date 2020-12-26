@@ -8,7 +8,10 @@
       <div class="task"></div>
     </div>
 
+
+
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
+      <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
 
       <div class="upgrade" @click="onUpgradeButtonClicked">
         <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
@@ -252,5 +255,11 @@ export default {
     backdrop-filter: blur(6px);
   }
 
+  .member{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: #434343;
+  }
 
 </style>

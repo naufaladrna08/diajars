@@ -1,11 +1,15 @@
 <template>
   <div class="container bg-green">
-    <Input placeholder="Search" style="margin:0" iconName="search"/>
+    <div class="tableHeader">
+      <Button bg="white" class="back_button" :noShadow="true" v-on:buttonClick="() => $router.push('/guru')"><i class="material-icons">chevron_left</i></Button>
+      <Input placeholder="Search" style="margin:0 0 0 auto; width: 30%"  iconName="search" :inputData.sync="searchQuery"/>
+    </div>
     <div class="table-container">
       <table class="table">
       <tr class="table-header">
         <th class="namaColumn">
           <p>Nama siswa</p>
+          <i class="material-icons sort" @click="() => asc=!asc">{{asc? 'arrow_drop_up': 'arrow_drop_down'}}</i>
         </th>
         <th>
           <p>Gender</p>
@@ -34,9 +38,29 @@
 
 <script>
 export default {
+  data(){
+    return {
+      asc: true,
+      searchQuery: '',
+      rawData: []
+    }
+  },
   methods:{
     cekMurid(){
       this.$router.push('/')
+    },
+
+  },
+  computed: {
+    computedMurid: {
+      get(){
+        if(this.searchQuery != ''){
+
+        }
+      },
+      set(things){
+
+      }
     }
   }
 }
@@ -50,9 +74,36 @@ export default {
   flex-direction: column;
 }
 
+.sort{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem !important;
+}
+
+.tableHeader{
+  width: 100%;
+  display: flex;
+}
+
+.back_button{
+  width: 2.5rem !important;
+  height: 2.5rem;
+  padding:0 !important;
+  border-radius: .5rem !important;
+  position: relative;
+  i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
+
 .table-container{
   padding:0 1rem;
-  border-radius: 1rem;
+  border-radius: .5rem;
   background: white;
   margin-top: 1rem;
   height: auto;
