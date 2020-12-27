@@ -9,7 +9,7 @@
       <tr class="table-header">
         <th class="namaColumn">
           <p>Nama siswa</p>
-          <i class="material-icons sort" @click="() => asc=!asc">{{asc? 'arrow_drop_up': 'arrow_drop_down'}}</i>
+          <i class="material-icons sort" @click="changeSort">{{ascendSort? 'arrow_drop_up': 'arrow_drop_down'}}</i>
         </th>
         <th>
           <p>Gender</p>
@@ -18,12 +18,12 @@
           <p></p>
         </th>
       </tr>
-      <tr @click="cekMurid()">
+      <tr @click="cekMurid(murid.id)" v-for="murid in computedMurid" :key="murid.id">
         <td>
-          <p>Nama yang relevan</p>
+          <p>{{ murid.nama }}</p>
         </td>
         <td>
-          <p>data</p>
+          <p>{{ murid.gender }}</p>
         </td>
         <td>
           <div class="actionContainer">
@@ -40,28 +40,45 @@
 export default {
   data(){
     return {
-      asc: true,
+      ascendSort: true,
       searchQuery: '',
       rawData: []
     }
   },
   methods:{
-    cekMurid(){
-      this.$router.push('/')
+    cekMurid(idMurid){
+      this.$router.push(`/guru/murid/${idMurid}`)
     },
+    fetchMurid(){
+      //fetch data from api and save it to this.rawData
+    },
+    changeSort(){
+      this.ascendSort = !this.ascendSort
+    }
 
   },
   computed: {
     computedMurid: {
       get(){
-        if(this.searchQuery != ''){
+        let sortedArray = this.rawData.sort((a,b) => {
+          let modifier = 1;
+          if(this.ascendSort === false) modifier = -1;
+          if(a['nama'] < b['nama']) return -1 * modifier;
+          if(a['nama'] > b['nama']) return 1 * modifier;
+          return 0;
+        })
 
-        }
+        if(this.searchQuery.length >= 3){
+          return sortedArray.filter(item => {return item.nama.includes(this.searchQuery)})
+        }else return sortedArray
       },
       set(things){
 
       }
     }
+  },
+  created(){
+    this.fetchMurid()
   }
 }
 </script>
