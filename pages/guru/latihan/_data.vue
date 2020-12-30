@@ -2,7 +2,7 @@
   <div class="container bg-green">
     <div class="tableHeader">
       <Button bg="white" class="back_button" v-on:buttonClick="back" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
-      <Input placeholder="Search" style="margin:0 0 0 auto; width: 30%"  iconName="search"/>
+      <Input placeholder="Search" style="margin:0 0 0 auto; width: 30%"  iconName="search" :inputData.sync="searchQuery"/>
     </div>
     <div class="table-container">
       <table class="table">
@@ -14,21 +14,21 @@
           <p>skor</p>
         </th>
         <th>
-          <p>tgl pengerjaan</p>
+          <p>tgl dikirim</p>
         </th>
         <th>
           <p></p>
         </th>
       </tr>
-      <tr @click="cekMurid()">
+      <tr @click="cekMurid()" v-for="murid in computedMurid" :key="murid.id">
         <td>
-          <p>Nama yang relevan</p>
+          <p>{{ murid.nama }}</p>
         </td>
         <td>
-          <p>data</p>
+          <p>{{ murid.skor }}</p>
         </td>
         <td>
-          <p>data</p>
+          <p>{{ murid.tgl_pengerjaan }}</p>
         </td>
         <td>
           <div class="actionContainer">
@@ -43,13 +43,40 @@
 
 <script>
 export default {
+  data(){
+    return {
+      rawData: [{
+        id: 123134,
+        nama: 'bayu',
+        skor: 90,
+        tgl_pengerjaan: new Date()
+      }],
+      searchQuery: ''
+    }
+  },
+  computed: {
+    computedMurid: {
+      get(){
+        return this.searchQuery.length >= 3 ? this.rawData.filter(item => {return item.nama.includes(this.searchQuery)}) : this.rawData
+      },
+      set(newValue){
+
+      }
+    }
+  },
   methods:{
     cekMurid(){
       this.$router.push('/')
     },
     back(){
       this.$router.push('/guru')
+    },
+    fetchMateri(){
+
     }
+  },
+  created(){
+    this.fetchMateri()
   }
 }
 </script>
@@ -83,7 +110,7 @@ export default {
 
 .table-container{
   padding:0 1rem;
-  border-radius: .5rem;
+  border-radius: 1rem;
   background: white;
   margin-top: 1rem;
   height: auto;

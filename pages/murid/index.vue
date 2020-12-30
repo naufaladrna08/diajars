@@ -1,9 +1,7 @@
 <template>
   <div class="container bg-yellow">
     <div class="taskbar">
-      <div class="task"></div>
-      <div class="task"></div>
-      <div class="task"></div>
+      <div class="task" v-for="task in tasks" :key="task.id"></div>
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
@@ -22,8 +20,27 @@
 export default {
   data(){
     return {
-      taskbarIsOpen: false
+      taskbarIsOpen: false,
+      tasks: [
+        {
+          id:1324,
+          type: 'latihan',
+          thumbnail: ''
+        }
+      ]
     }
+  },
+  methods:{
+    fetchMateri(){
+      //push data to task
+    },
+    fetchLatihan(){
+
+    }
+  },
+  created(){
+    this.fetchMateri()
+    this.fetchLatihan()
   }
 }
 </script>
