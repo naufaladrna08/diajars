@@ -10,7 +10,13 @@
       <div class="form">
         <Input placeholder="Nama"
         type="text"
-        :inputData.sync="form.nama" style="width: 100%"/>
+        :inputData.sync="form.nama"
+        style="width: 100%"/>
+        <InputEmail
+        placeholder="Email"
+        :inputData.sync="form.email"
+        style="width: 100%"
+        />
 
         <NumberInput placeholder="Umur" :inputData.sync="form.umur" class="separate"/>
         <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
@@ -44,6 +50,7 @@ export default {
       form: {
         nama:'',
         umur: '',
+        email: '',
         gender: '',
         namaKelas: '',
         jenisKelas: ''
