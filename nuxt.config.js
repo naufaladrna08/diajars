@@ -44,7 +44,8 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -54,4 +55,10 @@ export default {
   styleResources: {
     scss: ['./assets/scss/*.scss']
   },
+
+  axios: {
+    baseURL: 'http://localhost:8000/api/',
+    proxyHeaders: false,
+    credentials: false
+  }
 }
