@@ -46,8 +46,15 @@ export default {
     }
   },
   methods: {
-    mulaiBelajar(){
-      //action here
+    async mulaiBelajar(){  
+      await this.$axios.$post('register/murid', this.form)
+        .then(function(r) {
+          console.log(r)
+          this.router.push({path: 'secret'});
+        })
+        .catch(error => {
+          console.log("ERRRR:: ", error.response.data);
+        });
     }
   }
 }
