@@ -27,6 +27,8 @@
     </div>
     <div class="rightSide">
     </div>
+
+    <div class="errMessage" v-show="errMessage" @click="() => errMessage = ''"><i class="material-icons">error</i> {{errMessage}}</div>
   </div>
 </template>
 
@@ -42,11 +44,12 @@ export default {
         gender: '',
         kodeKelas: ''
       },
+      errMessage: '',
       arr: ['Laki-laki','Perempuan']
     }
   },
   methods: {
-    async mulaiBelajar(){  
+    async mulaiBelajar(){
       await this.$axios.$post('register/murid', this.form)
         .then(function(r) {
           console.log(r)
@@ -54,6 +57,7 @@ export default {
         })
         .catch(error => {
           console.log("ERRRR:: ", error.response.data);
+          this.errMessage = error.response.data
         });
     }
   }
@@ -61,6 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
   .container{
     display: flex;
     height: 100%;
@@ -92,5 +97,24 @@ export default {
   .mulaiBelajarButton{
     margin: .5rem;
     width: 100%;
+  }
+
+  .errMessage{
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 16px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    i{
+      font-size: 1.2rem;
+      margin: auto 0;
+      margin-right: .6rem;
+      color: red;
+    }
   }
 </style>
