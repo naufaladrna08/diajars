@@ -60,7 +60,13 @@ export default {
   },
   methods: {
     mulaiMengajar(){
-      //action here
+      this.$axios.$post('register/guru', {
+          photo: this.url,
+          data: this.form}
+        )
+        .then((resp) => {
+          console.log(resp)
+        })
     },
     onFileChange(e) {
       const file = e.target.files[0];
