@@ -51,13 +51,14 @@ export default {
   },
   methods: {
     async mulaiBelajar(){
+      let self = this
+
       await this.$axios.$post('register/murid', this.form)
         .then(function(r) {
-          console.log(r)
           if (r.status == "success") {
-            this.router.push({path: 'secret'});
-          } else {
-            this.errMessage = "Class code not found!"
+            self.$router.push({path: 'secret'});
+          } else if (r.status == "404_code") {
+            self.errMessage = "Kode kelas tidak ditemukan. Pastikan kode yang anda masukan benar."
           }
         })
         .catch(error => {
