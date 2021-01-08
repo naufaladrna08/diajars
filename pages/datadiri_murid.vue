@@ -19,6 +19,7 @@
         <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
         <Input placeholder="Kode Kelas"
         type="text"
+        :maxlength="6"
         iconName="school"
         :inputData.sync="form.kodeKelas" style="width: 100%"/>
         <Button bg="red" @buttonClick="mulaiBelajar" class="mulaiBelajarButton">Mulai Belajar</Button>
@@ -53,7 +54,11 @@ export default {
       await this.$axios.$post('register/murid', this.form)
         .then(function(r) {
           console.log(r)
-          this.router.push({path: 'secret'});
+          if (r.status == "success") {
+            this.router.push({path: 'secret'});
+          } else {
+            this.errMessage = "Class code not found!"
+          }
         })
         .catch(error => {
           console.log("ERRRR:: ", error.response.data);

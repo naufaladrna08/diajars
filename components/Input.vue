@@ -4,6 +4,7 @@
     <input :type="type" class="inputField font-black"
     v-model="inputData"
     @input="inputChange"
+    :maxlength="maxlength" 
     :placeholder="placeholder">
   </div>
 </template>
@@ -12,7 +13,8 @@
 export default {
   props: ['placeholder',
           'iconName',
-          'type'],
+          'type',
+          'maxlength'],
   data(){
     return {
       inputData: ''
