@@ -19,6 +19,7 @@
         <Dropdown placeholder="Gender" :inputData.sync="form.gender" class="separate" :item="arr"/>
         <Input placeholder="Kode Kelas"
         type="text"
+        :maxlength="6"
         iconName="school"
         :inputData.sync="form.kodeKelas" style="width: 100%"/>
         <Button bg="red" @buttonClick="mulaiBelajar" class="mulaiBelajarButton">Mulai Belajar</Button>
@@ -50,14 +51,20 @@ export default {
   },
   methods: {
     async mulaiBelajar(){
+      let self = this
+
       await this.$axios.$post('register/murid', this.form)
         .then(function(r) {
           //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! logout pake this.$session.destroy
-          this.$session.start()
-          this.$session.set('username', r.data.username)
-          this.$session.set('jwt', r.data.token)
-          Vue.http.headers.common['Authorization'] = 'Bearer ' + r.data.token
-          this.router.push({path: 'secret'});
+          if (r.status == "success") {
+            this.$session.start()
+            this.$session.set('username', r.data.username)
+            this.$session.set('jwt', r.data.token)
+            Vue.http.headers.common['Authorization'] = 'Bearer ' + r.data.token
+            self.$router.push({path: 'murid/'});
+          } else if (r.status == "404_code") {
+            self.errMessage = "Kode kelas tidak ditemukan. Pastikan kode yang anda masukan benar."
+          }
         })
         .catch(error => {
           console.log("ERRRR:: ", error.response.data);
