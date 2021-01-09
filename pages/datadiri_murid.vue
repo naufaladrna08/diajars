@@ -52,7 +52,11 @@ export default {
     async mulaiBelajar(){
       await this.$axios.$post('register/murid', this.form)
         .then(function(r) {
-          console.log(r)
+          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! logout pake this.$session.destroy
+          this.$session.start()
+          this.$session.set('username', r.data.username)
+          this.$session.set('jwt', r.data.token)
+          Vue.http.headers.common['Authorization'] = 'Bearer ' + r.data.token
           this.router.push({path: 'secret'});
         })
         .catch(error => {
