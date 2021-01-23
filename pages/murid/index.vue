@@ -6,7 +6,56 @@
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <i class="material-icons insight" @click="() => $router.push('/murid/statistik')">insights</i>
-      <img :src="require('~/assets/image/vector/Indonesia-y.svg')" class="map"  @click="() => taskbarIsOpen = true">
+      <h1 class="choosetheme">Pilih tema</h1>
+      <div class="themecard" @click="onThemecardClick('Aku')">
+        <p>Aku</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Lingkunganku')">
+        <p>Lingkunganku</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
+        <p>Kebutuhanku</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Binatang')">
+        <p>Binatang</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Tanaman')">
+        <p>Tanaman</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <!-- //semester 2 -->
+      <div class="themecard" @click="onThemecardClick('Rekreasi')">
+        <p>Rekreasi</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Kendaraan')">
+        <p>Kendaraan</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Pekerjaan')">
+        <p>Pekerjaan</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Api,air, udara')">
+        <p>Api,air, udara</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Alat komunikasi')">
+        <p>Alat komunikasi</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Negaraku')">
+        <p>Negaraku</p>
+        <span class="batch">Tugas baru</span>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Alam semesta')">
+        <p>Alam semesta</p>
+        <span class="batch">Tugas baru</span>
+      </div>
     </div>
 
     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout">
@@ -36,6 +85,9 @@ export default {
     },
     fetchLatihan(){
 
+    },
+    onThemecardClick(theme){
+      this.taskbarIsOpen = true
     }
   },
   created(){
@@ -46,10 +98,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
   .container{
     display: flex;
     height: 100%;
   }
+
+  .choosetheme{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
   .taskbar{
     position: absolute;
     width: 3rem;
@@ -67,10 +127,38 @@ export default {
   .whitecard{
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     z-index: 2;
     background: white;
     margin-left: auto;
+    padding: 2rem;
+    overflow: auto;
+    .themecard{
+      margin: auto;
+      width: 40%;
+      background: rgb(240, 230, 238);
+      height: 10rem;
+      margin-bottom: 3rem;
+      border-radius: 1rem;
+      position: relative;
+      .batch{
+        background: $red;
+        color: #fff;
+        border-radius: 100rem;
+        padding: .2rem .5rem;
+        font-size: .6rem;
+        position: absolute;
+        top: .5rem;
+        left: .5rem;
+      }
+      p{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translatex(-50%);
+      }
+    }
   }
 
   .logout{

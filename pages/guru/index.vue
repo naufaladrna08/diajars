@@ -21,7 +21,44 @@
         Upgrade kelas
         </p>
       </div>
-      <img :src="require('~/assets/image/vector/Indonesia.svg')" class="map"  @click="() => taskbarIsOpen = true">
+      <h1 class="choosetheme">Pilih tema</h1>
+      <div class="themecard" @click="onThemecardClick('Aku')">
+        <p>Aku</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Lingkunganku')">
+        <p>Lingkunganku</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
+        <p>Kebutuhanku</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Binatang')">
+        <p>Binatang</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Tanaman')">
+        <p>Tanaman</p>
+      </div>
+      <!-- //semester 2 -->
+      <div class="themecard" @click="onThemecardClick('Rekreasi')">
+        <p>Rekreasi</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Kendaraan')">
+        <p>Kendaraan</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Pekerjaan')">
+        <p>Pekerjaan</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Api,air, udara')">
+        <p>Api,air, udara</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Alat komunikasi')">
+        <p>Alat komunikasi</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Negaraku')">
+        <p>Negaraku</p>
+      </div>
+      <div class="themecard" @click="onThemecardClick('Alam semesta')">
+        <p>Alam semesta</p>
+      </div>
     </div>
 
     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout">
@@ -93,6 +130,9 @@ export default {
       //TODO : Check if the class is already premium
 
       this.$router.push('/upgrade_class')
+    },
+    onThemecardClick(theme){
+      this.taskbarIsOpen = true
     }
   }
 }
@@ -126,6 +166,7 @@ export default {
     border-radius: 100px;
     background: $yellow;
     display: flex;
+    z-index: 54;
 
     *{
       margin: auto 0;
@@ -146,6 +187,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .choosetheme{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
   }
 
   .VueCarousel{
@@ -199,10 +246,28 @@ export default {
   .whitecard{
     height: 100%;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     z-index: 2;
     background: white;
     margin-left: auto;
+    padding: 2rem;
+    overflow: auto;
+    .themecard{
+      margin: auto;
+      width: 40%;
+      background: rgb(240, 230, 238);
+      height: 10rem;
+      margin-bottom: 3rem;
+      border-radius: 1rem;
+      position: relative;
+      p{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translatex(-50%);
+      }
+    }
   }
 
   .logout{
