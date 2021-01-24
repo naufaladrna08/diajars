@@ -64,6 +64,8 @@ export default {
             self.$router.push({path: 'murid/'});
           } else if (r.status == "404_code") {
             self.errMessage = "Kode kelas tidak ditemukan. Pastikan kode yang anda masukan benar."
+          } else {
+            self.errMessage = r
           }
         })
         .catch(error => {
