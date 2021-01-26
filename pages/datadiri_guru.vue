@@ -68,7 +68,7 @@ export default {
 
       const formData = new FormData
       formData.append('image', this.photo)
-      formData.append('name', this.form.nama)
+      formData.append('nama', this.form.nama)
       formData.append('email', this.form.email)
 
       this.$axios.$post('register/guru', this.form)
@@ -80,10 +80,13 @@ export default {
             })
             
             /* ERROR */
-            // this.$session.start()
-            // this.$session.set('username', r.username)
-            // this.$session.set('jwt', r.token)
+            // self.$session.start()
+            // self.$session.set('username', r.username)
+            // self.$session.set('jwt', r.token)
             // Vue.http.headers.common['Authorization'] = 'Bearer ' + r.token
+            
+            // let token = this.$session.get('key')
+            // console.log(token)
             self.$router.push({path: 'guru/'});
           } else {
             self.errMessage = r
@@ -104,7 +107,8 @@ export default {
 
       }
     }
-  }
+  },
+  auth: false
 }
 </script>
 

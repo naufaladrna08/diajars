@@ -73,7 +73,8 @@ export default {
           this.errMessage = error.response.data
         });
     }
-  }
+  },
+  auth: false
 }
 </script>
 

@@ -45,7 +45,8 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -60,5 +61,19 @@ export default {
     baseURL: 'http://localhost:8000/api/',
     proxyHeaders: false,
     credentials: false
+  },
+  auth: {
+    redirect: {
+      login: '/'
+    },
+    strategies:{
+      google: {
+        client_id: "424731950380-hfrn7r6vsrdt9ai64trn1cv6csk24jmh.apps.googleusercontent.com"
+      }
+    },
+  },
+
+  router: {
+    middleware: ['auth']
   }
 }
