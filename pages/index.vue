@@ -32,20 +32,26 @@ export default {
 		}
 	},
 	methods: {
-		signInGoogle() {
-			// Why?
-			console.log("Tests")
+		async signInGoogle() {
+			// // Why?
+			// console.log("Tests")
 
-			const newWindow = openWindow('', 'message')
-			this.$axios.post('auth/google/callback')
-				.then(resp => {
-					newWindow.location.href = resp.data
-				})
-				.catch((error) => {
-          console.error(error);
-        });
+			// const newWindow = openWindow('', 'message')
+			// this.$axios.post('auth/google/callback')
+			// 	.then(resp => {
+			// 		newWindow.location.href = resp.data
+			// 	})
+			// 	.catch((error) => {
+   //        console.error(error);
+   //      });
 
-			state = 'pressed'
+			// state = 'pressed'
+			try {
+        let res = await this.$auth.loginWith('google');
+        console.log("login result: " + res);
+      } catch (err) {
+        this.consoleLog("login error: " + err);
+      }
 		}
 	}
 }

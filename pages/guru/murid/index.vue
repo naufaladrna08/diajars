@@ -42,7 +42,8 @@ export default {
     return {
       ascendSort: true,
       searchQuery: '',
-      rawData: []
+      rawData: [],
+      kelasId: 1
     }
   },
   methods:{
@@ -51,6 +52,11 @@ export default {
     },
     fetchMurid(){
       //fetch data from api and save it to this.rawData
+      this.$axios.$post('/guru/murid', {kelasId: this.kelasId})
+      .then((resp) => {
+        this.rawData = resp
+        console.log(resp)
+      })
     },
     changeSort(){
       this.ascendSort = !this.ascendSort
