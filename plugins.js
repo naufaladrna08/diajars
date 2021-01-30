@@ -1,3 +1,5 @@
-import Vue from 'vue';
-import VueCarousel from 'vue-carousel';
-Vue.use(VueCarousel);
+import Vue from 'vue'
+import VueCarousel from 'vue-carousel'
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+Vue.use(VueCarousel)
