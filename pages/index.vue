@@ -45,7 +45,7 @@ export default {
 			if (type == 'murid') {
 				this.$router.push('/murid')
 			} else {
-				this.$router.push('/murid')
+				this.$router.push('/guru')
 			}
 
 		}
