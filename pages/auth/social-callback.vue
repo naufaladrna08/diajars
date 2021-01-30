@@ -14,14 +14,18 @@ export default {
 	async mounted() {
 		await this.$auth.login({data: {
 			token: this.token
-		}})
-		this.$auth.setToken('local', 'Bearer ' + this.token);
-    this.$auth.setStrategy('local');
-    this.$auth.fetchUser().then( () => {
-      return this.$router.push('/guru');
-    }).catch( (e) => {
-      return this.$router.push(`/auth/${this.$route.query.origin ? this.$route.query.origin : 'register'}?error=1`);
-    });
+		}}).catch((e) => {
+			console.log(e)
+		})
+
+		switch (this.$auth.user.jenisAkun) {
+			case 'guru':
+				this.$router.push('/guru')
+				break
+			case 'murid':
+				this.$router.push('/murid')
+				break
+		}
 	},
 	auth: 'guest'
 }
