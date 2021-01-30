@@ -56,7 +56,7 @@ export default {
       await this.$axios.$post('register', this.form)
         .then(function(r) {
           if (r.status == "success") {
-            self.$router.push({path: 'murid/'});
+            self.$router.push('/?error=login')
           } else if (r.status == "404_code") {
             self.errMessage = "Kode kelas tidak ditemukan. Pastikan kode yang anda masukan benar."
           } else {
