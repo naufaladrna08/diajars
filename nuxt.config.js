@@ -58,22 +58,34 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://localhost:8000/api/',
-    proxyHeaders: false,
-    credentials: false
+    baseURL: 'http://localhost:8000/api/'
   },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8000/api/'
+  },
+
   auth: {
     redirect: {
       login: '/'
     },
-    strategies:{
-      google: {
-        client_id: "424731950380-hfrn7r6vsrdt9ai64trn1cv6csk24jmh.apps.googleusercontent.com"
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'token' },
+          user: { url: '/me', method: 'get', propertyName: 'data' },
+          logout: { method: 'get', url: '/logout', method: 'get' }
+        }
       }
-    },
-  },
-
-  router: {
-    middleware: ['auth']
+    }
   }
 }
