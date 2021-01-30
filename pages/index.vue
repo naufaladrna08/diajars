@@ -22,6 +22,8 @@
 		</svg>
 
 		<div class="errMessage" v-show="errMessage" @click="() => errMessage = ''"><i class="material-icons">error</i> {{errMessage}}</div>
+
+		<div class="infoMessage" v-show="infoMessage" @click="() => infoMessage = ''"><i class="material-icons">error</i> {{infoMessage}}</div>
 	</div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
 	data(){
 		return {
 			state: 'normal',
-			errMessage: ''
+			errMessage: '',
+			infoMessage: ''
 		}
 	},
 	methods: {
@@ -53,6 +56,8 @@ export default {
 
 		if (this.$route.query.error == 'unregistered') {
 			this.errMessage = "Email belum terdaftar!"
+		} else if (this.$route.query.error == 'login') {
+			this.infoMessage = "Silahkan masuk dengan Google"
 		}
 	}
 }
@@ -79,21 +84,40 @@ export default {
 }
 
 .errMessage{
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 10px 16px;
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-    display: flex;
-    i{
-      font-size: 1.2rem;
-      margin: auto 0;
-      margin-right: .6rem;
-      color: red;
-    }
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  i{
+    font-size: 1.2rem;
+    margin: auto 0;
+    margin-right: .6rem;
+    color: red;
   }
+}
+
+.infoMessage{
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  i{
+    font-size: 1.2rem;
+    margin: auto 0;
+    margin-right: .6rem;
+    color: green;
+  }
+}
 </style>
