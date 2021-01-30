@@ -71,22 +71,14 @@ export default {
       formData.append('nama', this.form.nama)
       formData.append('email', this.form.email)
 
-      this.$axios.$post('register/guru', this.form)
+      this.$axios.$post('register', this.form)
         .then(function(r) {
           if (r.status == "success") {
-            self.$axios.$post('register/guru/upload_photo', formData)
+            self.$axios.$post('upload_photo', formData)
             .then(function(r2) {
               console.log(r2)
             })
             
-            /* ERROR */
-            // self.$session.start()
-            // self.$session.set('username', r.username)
-            // self.$session.set('jwt', r.token)
-            // Vue.http.headers.common['Authorization'] = 'Bearer ' + r.token
-            
-            // let token = this.$session.get('key')
-            // console.log(token)
             self.$router.push({path: 'guru/'});
           } else {
             self.errMessage = r
