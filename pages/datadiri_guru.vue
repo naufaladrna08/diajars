@@ -79,7 +79,7 @@ export default {
               console.log(r2)
             })
             
-            self.$router.push({path: 'guru/'});
+            // self.$router.push({path: '/guru/'});
           } else {
             self.errMessage = r
           }
@@ -96,7 +96,7 @@ export default {
         this.url = URL.createObjectURL(file);
         this.photo = file
       } catch (error) {
-
+        console.log(error)
       }
     }
   },
