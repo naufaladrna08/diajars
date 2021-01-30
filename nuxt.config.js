@@ -77,7 +77,7 @@ export default {
           type: 'Bearer'
         },
         user: {
-          property: 'user',
+          property: 'data',
           // autoFetch: true
         },
         endpoints: {
@@ -87,5 +87,9 @@ export default {
         }
       }
     }
-  }
+  },
+
+  // router: {
+  //   middleware: ['auth']
+  // }
 }
