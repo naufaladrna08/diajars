@@ -6,7 +6,7 @@
 		<img class="signInButton"
 		draggable="false"
 		:src="require(`~/assets/image/bitmap/btn_google_signin_dark_${state}_web.png`)"
-		@click="()=>{signInGoogle}"
+		@click="signInGoogle"
 		@mouseover="()=>{state='focus'}"
 		@mouseout="() => {state = 'normal'}"
 		>
@@ -26,64 +26,20 @@
 
 <script>
 export default {
+	auth: 'guest',
 	data(){
 		return {
 			state: 'normal'
 		}
 	},
 	methods: {
-		async signInGoogle() {
-			// // Why?
-			// console.log("Tests")
+		signInGoogle() {
+			
+			window.location.href = `${process.env.baseUrl}auth/google/`
 
-			// const newWindow = openWindow('', 'message')
-			// this.$axios.post('auth/google/callback')
-			// 	.then(resp => {
-			// 		newWindow.location.href = resp.data
-			// 	})
-			// 	.catch((error) => {
-   //        console.error(error);
-   //      });
-
-			// state = 'pressed'
-			try {
-        let res = await this.$auth.loginWith('google');
-        console.log("login result: " + res);
-      } catch (err) {
-        this.consoleLog("login error: " + err);
-      }
+			this.state = 'pressed'
 		}
 	}
-}
-
-function openWindow(url, title, options = {}) {
-  if (typeof url === 'object') {
-    options = url
-    url = ''
-  }
-
-  options = { url, title, width: 600, height: 720, ...options }
-
-  const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left
-  const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top
-  const width = window.innerWidth || document.documentElement.clientWidth || window.screen.width
-  const height = window.innerHeight || document.documentElement.clientHeight || window.screen.height
-
-  options.left = ((width / 2) - (options.width / 2)) + dualScreenLeft
-  options.top = ((height / 2) - (options.height / 2)) + dualScreenTop
-
-  const optionsStr = Object.keys(options).reduce((acc, key) => {
-    acc.push(`${key}=${options[key]}`)
-    return acc
-  }, []).join(',')
-
-  const newWindow = window.open(url, title, optionsStr)
-
-  if (window.focus) {
-    newWindow.focus()
-  }
-
-  return newWindow
 }
 </script>
 
