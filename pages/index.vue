@@ -26,7 +26,6 @@
 
 <script>
 export default {
-	auth: 'guest',
 	data(){
 		return {
 			state: 'normal'
@@ -38,6 +37,17 @@ export default {
 			window.location.href = `${process.env.baseUrl}auth/google/`
 
 			this.state = 'pressed'
+		}
+	},
+	mounted() {
+		if (this.$auth.loggedIn == true) {
+			let type = this.$auth.user.jenisAkun
+			if (type == 'murid') {
+				this.$router.push('/murid')
+			} else {
+				this.$router.push('/murid')
+			}
+
 		}
 	}
 }
