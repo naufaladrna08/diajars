@@ -34,7 +34,7 @@
       </table>
     </div>
     <div class="infokelas">
-      Nama kelas : [namakelas], kode kelas : [kode]
+      Nama kelas : {{ namaKelas }}, kode kelas : {{ kodeKelas }}
     </div>
   </div>
 </template>
@@ -46,7 +46,9 @@ export default {
       ascendSort: true,
       searchQuery: '',
       rawData: [],
-      guruId: this.$auth.user.id
+      guruId: this.$auth.user.id,
+      namaKelas: 0,
+      kodeKelas: 0
     }
   },
   methods:{
@@ -57,14 +59,22 @@ export default {
       //fetch data from api and save it to this.rawData
       this.$axios.$post('/guru/murid', {guruId: this.guruId})
       .then((resp) => {
-        console.log(this.guruId)
         this.rawData = resp
       })
     },
     changeSort(){
       this.ascendSort = !this.ascendSort
+    },
+    getClassDetail() {
+      let self = this
+      self.$axios.$post('/guru/check_class_state', {
+        guruId: self.guruId
+      })
+      .then(function(resp) {
+        self.namaKelas = resp.namaKelas
+        self.kodeKelas = resp.kodeKelas
+      })
     }
-
   },
   computed: {
     computedMurid: {
@@ -88,6 +98,7 @@ export default {
   },
   created(){
     this.fetchMurid()
+    this.getClassDetail()
   }
 }
 </script>

@@ -10,9 +10,9 @@
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <div class="kelasFloating">
-        <input id="code" value="kodekelasz" style="opacity:0; position: absolute;bottom:-1000rem">
+        <input id="code" value="kodekelas" style="opacity:0; position: absolute;bottom:-1000rem">
 
-        <div class="kodeKelas" @click="copyCode">Kode Kelas : [kode]</div>
+        <div class="kodeKelas" @click="copyCode">Kode Kelas : {{ kodeKelas }}</div>
         <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
       </div>
 
@@ -78,6 +78,14 @@
         contextIsOpen = false
         contextMateriIsOpen = true
         }">
+
+        <img 
+          :src="require(`~/assets/image/vector/Theory.svg`)" 
+          alt="Theory Icon"
+          class="theory-icon"
+        />
+        <h1> Materi </h1>
+
         <svg width="121" height="108" viewBox="0 0 121 108" fill="none" class="blob__left" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.995 108L18 108C8.05888 108 0 99.9411 0 90L0 21.7694C1.17016 21.0134 2.32814 20.2502 3.46484 19.4734C6.13958 17.6453 8.79376 15.6087 11.4628 13.5607C20.9367 6.291 30.5974 -1.12201 42.0281 0.141639C50.5902 1.08816 56.1353 7.80593 61.8186 14.6911C65.7502 19.4542 69.748 24.2975 74.8565 27.3656C80.4928 30.7506 87.8112 32.0606 94.9617 33.3405C106.213 35.3545 117.049 37.2941 120.262 47.1272C123.408 56.7573 115.951 64.4996 108.186 72.5627C102.99 77.9573 97.6564 83.4954 95.2671 89.8385C93.1313 95.5088 92.9788 101.77 92.995 108Z" fill="#00C491"/></svg>
       </div>
 
@@ -85,6 +93,14 @@
         contextIsOpen = false
         contextLatihanIsOpen = true
         }">
+
+        <img 
+          :src="require(`~/assets/image/vector/Games.svg`)" 
+          alt="Latihan Icon"
+          class="latihan-icon"
+        />
+        <h1> Latihan </h1>
+
         <svg width="99" height="99" viewBox="0 0 99 99" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__right"><path fill-rule="evenodd" clip-rule="evenodd" d="M99 4.28351L99 81C99 90.9411 90.9411 99 81 99L0.556617 99C0.441699 98.5481 0.341397 98.0874 0.256331 97.6176C-1.37609 88.6025 5.06571 81.643 11.7128 74.4618C16.7992 68.9667 22.0058 63.3417 23.8068 56.5664C25.7415 49.2882 23.9442 41.017 22.1962 32.9725C19.7954 21.9233 17.4874 11.3018 25.0702 4.2687C33.0394 -3.12272 44.0833 0.551417 55.4726 4.34043C62.1055 6.54708 68.8555 8.7927 75.1835 8.91423C81.3867 9.03337 87.8952 7.26831 94.3018 5.5309C95.876 5.10398 97.4441 4.67873 99 4.28351Z" fill="#F7BE3A"/></svg>
       </div>
     </div>
@@ -96,9 +112,18 @@
         }"></div>
 
         <carousel :perPage="1" :paginationEnabled="false">
-          <slide>
-            <div class="materiContextMenu"></div>
-          </slide>
+          <div v-for="materi in rawMateri" :key="rawMateri.id">
+            <slide>
+              <div class="materiContextMenu"> 
+                <!-- 
+                  TODO:
+                  Background: materi.thumbnail 
+                  OnClick: materi.link
+                -->
+                {{ materi.nama }} 
+              </div>
+            </slide>
+          </div>
         </carousel>
     </div>
 
@@ -109,9 +134,18 @@
         }"></div>
 
         <carousel :perPage="1" :paginationEnabled="false">
-          <slide>
-            <div class="latihanContextMenu"></div>
-          </slide>
+          <div v-for="game in rawGames" :key="rawGames.id">
+            <slide>
+              <div class="latihanContextMenu"> 
+                <!-- 
+                  TODO:
+                  Background: game.thumbnail 
+                  OnClick: game.link
+                -->
+                {{ game.nama }} 
+              </div>
+            </slide>
+          </div>
         </carousel>
 
     </div>
@@ -128,7 +162,11 @@ export default {
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
       isPremium: false,
-      guruId: this.$auth.user.id
+      guruId: this.$auth.user.id,
+      jenisKelas: 0,
+      kodeKelas: 0,
+      rawMateri: [],
+      rawGames: []
     }
   },
   methods:{
@@ -165,12 +203,33 @@ export default {
           self.isPremium = true
         }
 
-        console.log(self.guruId)
+        self.jenisKelas = resp.jenisKelas
+        self.kodeKelas = resp.kodeKelas
+      })
+    },
+    getMateri() {
+      let self = this
+      this.$axios.$post('guru/get_materi', {
+        jenisKelas: self.jenisKelas
+      })
+      .then(function (resp) {
+        self.rawMateri = resp
+      })
+    },
+    getGames() {
+      let self = this
+      this.$axios.$post('guru/get_games', {
+        jenisKelas: self.jenisKelas
+      })
+      .then(function (resp) {
+        self.rawGames = resp
       })
     }
   },
   created() {
     this.checkIsPremium()
+    this.getMateri()
+    this.getGames()
   }
 }
 </script>
@@ -381,4 +440,13 @@ export default {
     font-size: .8rem;
   }
 
+  .theory-icon {
+    width: 128px;
+    height: 128px;
+  }
+
+  .latihan-icon {
+    width: 128px;
+    height: 128px;
+  }
 </style>
