@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   sodipodi:docname="Games.svg">
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1505"
+       x="-4.7999991e-06"
+       width="1.0000096"
+       y="-4.7999991e-06"
+       height="1.0000096">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="6.9326446e-06"
+         id="feGaussianBlur1507" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="197.53417"
+     inkscape:cy="342.90921"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     showborder="true"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="846"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-161.53332)">
+    <path
+       id="path1460"
+       style="fill:#4d4d4d;stroke-width:7.55906"
+       d="M 149.19727 247.78125 A 48.533734 48.533734 0 0 0 100.74219 296.31445 A 48.533734 48.533734 0 0 0 149.27734 344.84961 A 48.533734 48.533734 0 0 0 191.18555 320.79297 L 255.19922 320.79297 A 48.533734 48.533734 0 0 0 297.10547 344.84961 A 48.533734 48.533734 0 0 0 345.63867 296.31445 A 48.533734 48.533734 0 0 0 297.10547 247.78125 A 48.533734 48.533734 0 0 0 263.25586 261.53516 L 183.12891 261.53516 A 48.533734 48.533734 0 0 0 149.27734 247.78125 A 48.533734 48.533734 0 0 0 149.19727 247.78125 z "
+       transform="matrix(0.26458333,0,0,0.26458333,0,161.53332)" />
+    <rect
+       style="fill:#ececec;stroke-width:2"
+       id="rect1485"
+       width="4.0105948"
+       height="12.877585"
+       x="36.906231"
+       y="233.36108" />
+    <rect
+       style="fill:#ececec;stroke-width:2"
+       id="rect1487"
+       width="14.61867"
+       height="3.9546111"
+       x="31.602192"
+       y="237.82257" />
+    <circle
+       style="fill:#ff5555;stroke-width:2"
+       id="path1489"
+       cx="72.980827"
+       cy="239.93344"
+       r="1.7331614" />
+    <circle
+       style="fill:#55ff99;stroke-width:2;filter:url(#filter1505)"
+       id="circle1491"
+       cx="79.056023"
+       cy="233.51529"
+       r="1.7331614" />
+    <circle
+       style="fill:#2a7fff;stroke-width:2;filter:url(#filter1505)"
+       id="circle1509"
+       cx="85.100235"
+       cy="239.93344"
+       r="1.7331614" />
+    <circle
+       style="fill:#decd87;stroke-width:2;filter:url(#filter1505)"
+       id="circle1511"
+       cx="79.190277"
+       cy="246.32474"
+       r="1.7331614" />
+    <path
+       style="fill:none;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 62.250523,236.13075 c 0,0 2.379983,-12.78213 -5.425453,-14.26584 -7.805436,-1.48371 -10.414725,-14.77692 -3.153942,-18.07101 7.260786,-3.29409 8.286319,3.96781 8.286319,3.96781 l 0.106375,1.47209"
+       id="path1523" />
+  </g>
+</svg>
