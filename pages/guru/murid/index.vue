@@ -23,7 +23,7 @@
           <p>{{ murid.nama }}</p>
         </td>
         <td>
-          <p>{{ murid.gender }}</p>
+          <p>{{ murid.jenisKelamin }}</p>
         </td>
         <td>
           <div class="actionContainer">
@@ -45,7 +45,8 @@ export default {
     return {
       ascendSort: true,
       searchQuery: '',
-      rawData: []
+      rawData: [],
+      guruId: this.$auth.user.id
     }
   },
   methods:{
@@ -54,6 +55,11 @@ export default {
     },
     fetchMurid(){
       //fetch data from api and save it to this.rawData
+      this.$axios.$post('/guru/murid', {guruId: this.guruId})
+      .then((resp) => {
+        console.log(this.guruId)
+        this.rawData = resp
+      })
     },
     changeSort(){
       this.ascendSort = !this.ascendSort

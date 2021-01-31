@@ -25,7 +25,7 @@
         iconName="school"
         :inputData.sync="form.namaKelas" style="width: 100%"/>
         <Dropdown placeholder="Jenis kelas"
-        :inputData.sync="form.jenis_kelas"
+        :inputData.sync="form.jenisKelas"
         style="width: 100%"
         :item="['A','B']"/>
         <Button bg="yellow" @buttonClick="mulaiMengajar" class="mulaiMengajarButton">Mulai Mengajar</Button>
@@ -49,6 +49,7 @@ export default {
   data(){
     return {
       url:null,
+      photo:null,
       form: {
         nama:'',
         umur: '',
@@ -63,23 +64,41 @@ export default {
   },
   methods: {
     mulaiMengajar(){
-      this.$axios.$post('register/guru', {
-          photo: this.url,
-          data: this.form}
-        )
-        .then((resp) => {
-          console.log(resp)
+      let self = this
+
+      const formData = new FormData
+      formData.append('image', this.photo)
+      formData.append('nama', this.form.nama)
+      formData.append('email', this.form.email)
+
+      this.$axios.$post('register', this.form)
+        .then(function(r) {
+          if (r.status == "success") {
+            self.$axios.$post('upload_photo', formData)
+            .then(function(r2) {
+              self.$router.push('/?error=login')
+            })
+          } else {
+            self.errMessage = r
+          }
+          console.log(r)
         })
+        .catch(error => {
+          console.log("ERRRR:: ", error.response.data);
+          this.errMessage = error.response.data
+        });
     },
     onFileChange(e) {
       const file = e.target.files[0];
       try {
         this.url = URL.createObjectURL(file);
+        this.photo = file
       } catch (error) {
-
+        // console.log(error)
       }
     }
-  }
+  },
+  auth: false
 }
 </script>
 

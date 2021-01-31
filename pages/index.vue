@@ -6,7 +6,7 @@
 		<img class="signInButton"
 		draggable="false"
 		:src="require(`~/assets/image/bitmap/btn_google_signin_dark_${state}_web.png`)"
-		@click="()=>{signInGoogle}"
+		@click="signInGoogle"
 		@mouseover="()=>{state='focus'}"
 		@mouseout="() => {state = 'normal'}"
 		>
@@ -21,6 +21,9 @@
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M273.539 0.0177769C305.604 1.1125 315.672 45.8551 337.201 69.672C352.413 86.4995 367.211 101.881 381.525 119.479C401.196 143.662 435.86 161.224 437.021 192.391C438.162 223.027 411.352 248.695 387.032 267.321C365.092 284.124 335.711 282.693 309.159 290.317C282.818 297.881 258.959 312.869 231.572 311.961C199.089 310.883 161.411 309.194 140.004 284.708C118.596 260.221 127.786 222.655 125.136 190.22C122.662 159.943 108.35 126.333 124.991 100.932C141.683 75.4539 181.841 82.3354 207.024 65.2275C233.232 47.423 241.885 -1.06291 273.539 0.0177769Z" fill="#D6EAED"/>
 		</svg>
 
+		<div class="errMessage" v-show="errMessage" @click="() => errMessage = ''"><i class="material-icons">error</i> {{errMessage}}</div>
+
+		<div class="infoMessage" v-show="infoMessage" @click="() => infoMessage = ''"><i class="material-icons">error</i> {{infoMessage}}</div>
 	</div>
 </template>
 
@@ -28,56 +31,35 @@
 export default {
 	data(){
 		return {
-			state: 'normal'
+			state: 'normal',
+			errMessage: '',
+			infoMessage: ''
 		}
 	},
 	methods: {
 		signInGoogle() {
-			// Why?
-			console.log("Tests")
+			
+			window.location.href = `${process.env.baseUrl}auth/google/`
 
-			const newWindow = openWindow('', 'message')
-			this.$axios.post('auth/google/callback')
-				.then(resp => {
-					newWindow.location.href = resp.data
-				})
-				.catch((error) => {
-          console.error(error);
-        });
+			this.state = 'pressed'
+		}
+	},
+	mounted() {
+		if (this.$auth.loggedIn == true) {
+			let type = this.$auth.user.jenisAkun
+			if (type == 'murid') {
+				this.$router.push('/murid')
+			} else {
+				this.$router.push('/guru')
+			}
+		}
 
-			state = 'pressed'
+		if (this.$route.query.error == 'unregistered') {
+			this.errMessage = "Email belum terdaftar!"
+		} else if (this.$route.query.error == 'login') {
+			this.infoMessage = "Silahkan masuk dengan Google"
 		}
 	}
-}
-
-function openWindow(url, title, options = {}) {
-  if (typeof url === 'object') {
-    options = url
-    url = ''
-  }
-
-  options = { url, title, width: 600, height: 720, ...options }
-
-  const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left
-  const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top
-  const width = window.innerWidth || document.documentElement.clientWidth || window.screen.width
-  const height = window.innerHeight || document.documentElement.clientHeight || window.screen.height
-
-  options.left = ((width / 2) - (options.width / 2)) + dualScreenLeft
-  options.top = ((height / 2) - (options.height / 2)) + dualScreenTop
-
-  const optionsStr = Object.keys(options).reduce((acc, key) => {
-    acc.push(`${key}=${options[key]}`)
-    return acc
-  }, []).join(',')
-
-  const newWindow = window.open(url, title, optionsStr)
-
-  if (window.focus) {
-    newWindow.focus()
-  }
-
-  return newWindow
 }
 </script>
 
@@ -101,4 +83,41 @@ function openWindow(url, title, options = {}) {
 	margin-top: 0;
 }
 
+.errMessage{
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  i{
+    font-size: 1.2rem;
+    margin: auto 0;
+    margin-right: .6rem;
+    color: red;
+  }
+}
+
+.infoMessage{
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  i{
+    font-size: 1.2rem;
+    margin: auto 0;
+    margin-right: .6rem;
+    color: green;
+  }
+}
 </style>

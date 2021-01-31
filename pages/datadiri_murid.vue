@@ -53,25 +53,25 @@ export default {
     async mulaiBelajar(){
       let self = this
 
-      await this.$axios.$post('register/murid', this.form)
+      await this.$axios.$post('register', this.form)
         .then(function(r) {
-          //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! logout pake this.$session.destroy
           if (r.status == "success") {
-            this.$session.start()
-            this.$session.set('username', r.data.username)
-            this.$session.set('jwt', r.data.token)
-            Vue.http.headers.common['Authorization'] = 'Bearer ' + r.data.token
-            self.$router.push({path: 'murid/'});
+            self.$router.push('/?error=login')
           } else if (r.status == "404_code") {
             self.errMessage = "Kode kelas tidak ditemukan. Pastikan kode yang anda masukan benar."
+          } else {
+            self.errMessage = r
           }
+
+          console.log(r)
         })
         .catch(error => {
           console.log("ERRRR:: ", error.response.data);
           this.errMessage = error.response.data
         });
     }
-  }
+  },
+  auth: false
 }
 </script>
 

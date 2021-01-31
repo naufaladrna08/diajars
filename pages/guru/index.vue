@@ -8,8 +8,6 @@
       <div class="task"></div>
     </div>
 
-
-
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <div class="kelasFloating">
         <input id="code" value="kodekelasz" style="opacity:0; position: absolute;bottom:-1000rem">
@@ -18,15 +16,18 @@
         <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
       </div>
 
-      <div class="upgrade" @click="onUpgradeButtonClicked">
-        <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
-        </svg>
-        <p>
-        Upgrade kelas
-        </p>
+      <div v-if="isPremium == false">
+        <div class="upgrade" @click="onUpgradeButtonClicked">
+          <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+          </svg>
+          <p>
+          Upgrade kelas
+          </p>
+        </div>
       </div>
-      <h1 class="choosetheme">Pilih tema</h1>
+
+      <h1 class="choosetheme">Pilih tema </h1>
       <div class="themecard" @click="onThemecardClick('Aku')">
         <p>Aku</p>
       </div>
@@ -66,7 +67,7 @@
       </div>
     </div>
 
-    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout">
+    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout" @click='logout'>
     <path d="M13 15V12H6V8H13V5L18 10L13 15ZM11 0C11.5304 0 12.0391 0.210714 12.4142 0.585786C12.7893 0.960859 13 1.46957 13 2V4H11V2H2V18H11V16H13V18C13 18.5304 12.7893 19.0391 12.4142 19.4142C12.0391 19.7893 11.5304 20 11 20H2C1.46957 20 0.960859 19.7893 0.585786 19.4142C0.210714 19.0391 0 18.5304 0 18V2C0 1.46957 0.210714 0.960859 0.585786 0.585786C0.960859 0.210714 1.46957 0 2 0H11Z" :fill="[taskbarIsOpen?'#fff':'#434343']"/>
     </svg>
 
@@ -115,8 +116,6 @@
 
     </div>
 
-
-
   </div>
 </template>
 
@@ -128,12 +127,12 @@ export default {
       contextIsOpen: false,
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
+      isPremium: false,
+      guruId: this.$auth.user.id
     }
   },
   methods:{
     onUpgradeButtonClicked(){
-      //TODO : Check if the class is already premium
-
       this.$router.push('/upgrade_class')
     },
     onThemecardClick(theme){
@@ -149,7 +148,29 @@ export default {
 
       /* Copy the text inside the text field */
       document.execCommand("copy");
+    },
+
+    logout() {
+      this.$auth.logout()
+    },
+    checkIsPremium() {
+      let self = this
+      self.$axios.$post('/guru/check_class_state', {
+        guruId: self.guruId
+      })
+      .then(function(resp) {
+        if (resp == 'x') {
+          self.isPremium = false
+        } else {
+          self.isPremium = true
+        }
+
+        console.log(self.guruId)
+      })
     }
+  },
+  created() {
+    this.checkIsPremium()
   }
 }
 </script>
