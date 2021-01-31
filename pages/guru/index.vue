@@ -8,19 +8,20 @@
       <div class="task"></div>
     </div>
 
-
-
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
 
-      <div class="upgrade" @click="onUpgradeButtonClicked">
-        <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
-        </svg>
-        <p>
-        Upgrade kelas
-        </p>
+      <div v-if="isPremium == false">
+        <div class="upgrade" @click="onUpgradeButtonClicked">
+          <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+          </svg>
+          <p>
+          Upgrade kelas
+          </p>
+        </div>
       </div>
+
       <h1 class="choosetheme">Pilih tema </h1>
       <div class="themecard" @click="onThemecardClick('Aku')">
         <p>Aku</p>
@@ -110,8 +111,6 @@
 
     </div>
 
-
-
   </div>
 </template>
 
@@ -123,12 +122,12 @@ export default {
       contextIsOpen: false,
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
+      isPremium: false,
+      guruId: this.$auth.user.id
     }
   },
   methods:{
     onUpgradeButtonClicked(){
-      //TODO : Check if the class is already premium
-
       this.$router.push('/upgrade_class')
     },
     onThemecardClick(theme){
@@ -137,7 +136,25 @@ export default {
 
     logout() {
       this.$auth.logout()
+    },
+    checkIsPremium() {
+      let self = this
+      self.$axios.$post('/guru/check_class_state', {
+        guruId: self.guruId
+      })
+      .then(function(resp) {
+        if (resp == 'x') {
+          self.isPremium = false
+        } else {
+          self.isPremium = true
+        }
+
+        console.log(self.guruId)
+      })
     }
+  },
+  created() {
+    this.checkIsPremium()
   }
 }
 </script>
