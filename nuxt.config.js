@@ -45,7 +45,14 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    [
+      'vue-sweetalert2/nuxt',
+      {
+        confirmButtonColor: '#41b882',
+        cancelButtonColor: '#ff7674'
+      }
+    ]
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

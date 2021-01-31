@@ -11,7 +11,12 @@
 
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
-      <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
+      <div class="kelasFloating">
+        <input id="code" value="kodekelasz" style="opacity:0; position: absolute;bottom:-1000rem">
+
+        <div class="kodeKelas" @click="copyCode">Kode Kelas : [kode]</div>
+        <i class="material-icons member" @click="() => $router.push('/guru/murid')">group</i>
+      </div>
 
       <div class="upgrade" @click="onUpgradeButtonClicked">
         <svg style="width:14px;height:14px;" viewBox="0 0 24 24">
@@ -133,6 +138,17 @@ export default {
     },
     onThemecardClick(theme){
       this.taskbarIsOpen = true
+
+    },
+    copyCode(){
+      var copyText = document.getElementById("code");
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
     }
   }
 }
@@ -320,11 +336,28 @@ export default {
     backdrop-filter: blur(6px);
   }
 
-  .member{
+  .kelasFloating{
+    z-index: 22;
     position: absolute;
     bottom: 1rem;
     right: 1rem;
     color: #434343;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .member{
+    margin: auto 0;
+  }
+  .kodeKelas{
+    color: #434343;
+    margin: auto 0;
+    margin-right: 1rem;
+    background: #807d7d2f;
+    padding: .2rem .4rem;
+    border-radius: 100rem;
+    border: 1px solid #757575;
+    font-size: .8rem;
   }
 
 </style>

@@ -33,6 +33,9 @@
       </tr>
       </table>
     </div>
+    <div class="infokelas">
+      Nama kelas : [namakelas], kode kelas : [kode]
+    </div>
   </div>
 </template>
 
@@ -169,5 +172,9 @@ export default {
     margin: auto 1rem auto auto;
 
   }
+
+}
+.infokelas{
+  color: white;
 }
 </style>
