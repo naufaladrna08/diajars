@@ -79,8 +79,8 @@
         contextMateriIsOpen = true
         }">
 
-        <img 
-          :src="require(`~/assets/image/vector/Theory.svg`)" 
+        <img
+          :src="require(`~/assets/image/vector/Theory.svg`)"
           alt="Theory Icon"
           class="theory-icon"
         />
@@ -94,8 +94,8 @@
         contextLatihanIsOpen = true
         }">
 
-        <img 
-          :src="require(`~/assets/image/vector/Games.svg`)" 
+        <img
+          :src="require(`~/assets/image/vector/Games.svg`)"
           alt="Latihan Icon"
           class="latihan-icon"
         />
@@ -114,13 +114,13 @@
         <carousel :perPage="1" :paginationEnabled="false">
           <div v-for="materi in rawMateri" :key="rawMateri.id">
             <slide>
-              <div class="materiContextMenu"> 
-                <!-- 
+              <div class="materiContextMenu">
+                <!--
                   TODO:
-                  Background: materi.thumbnail 
+                  Background: materi.thumbnail
                   OnClick: materi.link
                 -->
-                {{ materi.nama }} 
+                {{ materi.nama }}
               </div>
             </slide>
           </div>
@@ -134,15 +134,15 @@
         }"></div>
 
         <carousel :perPage="1" :paginationEnabled="false">
-          <div v-for="game in rawGames" :key="rawGames.id">
-            <slide>
-              <div class="latihanContextMenu"> 
-                <!-- 
+          <div>
+            <slide v-for="game in rawGames" :key="rawGames.id">
+              <div class="latihanContextMenu">
+                <!--
                   TODO:
-                  Background: game.thumbnail 
+                  Background: game.thumbnail
                   OnClick: game.link
                 -->
-                {{ game.nama }} 
+                {{ game.nama }}
               </div>
             </slide>
           </div>

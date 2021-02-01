@@ -1,9 +1,10 @@
 <script>
-import { Bar } from 'vue-chartjs'
-
+import { Bar, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 export default {
   extends: Bar,
   props: ["chartData"],
+  mixins: [reactiveProp],
   mounted () {
     this.renderChart({
       labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
