@@ -7,7 +7,7 @@
     <div class="whiteBox">
       Perkembangan siswa
       <div class="chartContainer">
-        <Chart style="height: 100%;width:100% !important" :chartData="chartData"/>
+        <Chart style="height: 100%;width:100% !important" :chart-data="chartData"/>
       </div>
     </div>
   </div>
@@ -17,16 +17,33 @@
 export default {
   data(){
     return {
-      chartData: {
-        nilaiAgama: 0,
-        motorikHalus: 0,
-        motorikKasar: 0,
-        bahasa: 0,
-        kognitif: 0,
-        sosialEmosi: 0,
-        seni: 0,
-      },
-      muridId: this.$auth.user.id
+      chartData:{
+      labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+      datasets: [
+        {
+          label: 'Skor perkembangan anak',
+          backgroundColor: [
+                'rgba(255, 99, 132)',
+                'rgba(54, 162, 235)',
+                'rgba(255, 206, 86)',
+                'rgba(75, 192, 192)',
+                'rgba(153, 102, 255)',
+                'rgba(255, 159, 64)',
+                'rgb(70,189,135)'
+            ],
+          data: [0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+                ]
+        },
+      ]
+    },
+      muridId: 1
     }
   },
   methods: {
@@ -36,15 +53,37 @@ export default {
         muridId: self.muridId
       })
       .then(function(resp) {
-        self.chartData.nilaiAgama = resp.agama
-        self.chartData.motorikHalus = resp.motorik_halus
-        self.chartData.motorikKasar = resp.motorik_kasar
-        self.chartData.bahasa = resp.bahasa
-        self.chartData.kognitif = resp.kognitif
-        self.chartData.sosialEmosi = resp.sosial_emosi
-        self.chartData.seni = resp.seni
+        //
+
+        this.chartData = {
+          labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+          datasets: [
+            {
+              label: 'Skor perkembangan anak',
+              backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
+                    'rgb(70,189,135)'
+                ],
+              data: [resp.nilaiAgama,
+                    resp.motorikHalus,
+                    resp.motorikKasar,
+                    resp.bahasa,
+                    resp.bahasa,
+                    resp.kognitif,
+                    resp.sosialEmosi,
+                    resp.seni
+                    ]
+            },
+          ]
+        }
+
       })
-    }
+    },
   },
   created(){
     this.fetchChartData()
