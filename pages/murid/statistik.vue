@@ -7,13 +7,16 @@
     <div class="whiteBox">
       Perkembangan siswa
       <div class="chartContainer">
-        <Chart style="height: 100%;width:100% !important" :chartData="chartData"/>
+        <Chart style="height: 100%;width:100% !important" :chart-data="chartData"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Bar, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
+
 export default {
   data(){
     return {
@@ -36,15 +39,17 @@ export default {
         muridId: self.muridId
       })
       .then(function(resp) {
-        self.chartData.nilaiAgama = resp.agama
         self.chartData.motorikHalus = resp.motorik_halus
         self.chartData.motorikKasar = resp.motorik_kasar
         self.chartData.bahasa = resp.bahasa
         self.chartData.kognitif = resp.kognitif
         self.chartData.sosialEmosi = resp.sosial_emosi
         self.chartData.seni = resp.seni
+        this.chartData.nilaiAgama = 5
+      
+        console.log(resp)
       })
-    }
+    }    
   },
   created(){
     this.fetchChartData()

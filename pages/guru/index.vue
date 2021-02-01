@@ -160,7 +160,7 @@ export default {
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
       isPremium: false,
-      // guruId: this.$auth.user.id,
+      guruId: this.$auth.user.id,
       jenisKelas: 0,
       kodeKelas: 0,
       rawMateri: [{nama: 'ao',id:1},{nama: 'ao',id:2}],

@@ -18,13 +18,7 @@ export default {
   data(){
     return {
       chartData: {
-        nilaiAgama: 0,
-        motorikHalus: 0,
-        motorikKasar: 0,
-        bahasa: 0,
-        kognitif: 0,
-        sosialEmosi: 0,
-        seni: 0
+        
       },
 
       muridId: this.$route.params.id
@@ -47,7 +41,7 @@ export default {
       })
     }
   },
-  created(){
+  mounted(){
     this.fetchChartData()
   }
 }
