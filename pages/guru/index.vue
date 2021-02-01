@@ -112,8 +112,8 @@
         }"></div>
 
         <carousel :perPage="1" :paginationEnabled="false">
-          <div v-for="materi in rawMateri" :key="rawMateri.id">
-            <slide>
+          <!-- <div> -->
+            <slide v-for="materi in rawMateri" :key="materi.id">
               <div class="materiContextMenu">
                 <!--
                   TODO:
@@ -123,7 +123,7 @@
                 {{ materi.nama }}
               </div>
             </slide>
-          </div>
+          <!-- </div> -->
         </carousel>
     </div>
 
@@ -134,8 +134,7 @@
         }"></div>
 
         <carousel :perPage="1" :paginationEnabled="false">
-          <div>
-            <slide v-for="game in rawGames" :key="rawGames.id">
+            <slide v-for="game in rawGames" :key="game.id">
               <div class="latihanContextMenu">
                 <!--
                   TODO:
@@ -145,7 +144,6 @@
                 {{ game.nama }}
               </div>
             </slide>
-          </div>
         </carousel>
 
     </div>
@@ -162,11 +160,11 @@ export default {
       contextMateriIsOpen: false,
       contextLatihanIsOpen: false,
       isPremium: false,
-      guruId: this.$auth.user.id,
+      // guruId: this.$auth.user.id,
       jenisKelas: 0,
       kodeKelas: 0,
-      rawMateri: [],
-      rawGames: []
+      rawMateri: [{nama: 'ao',id:1},{nama: 'ao',id:2}],
+      rawGames: [{nama: 'ao',id:1},{nama: 'ao',id:2}]
     }
   },
   methods:{
@@ -293,7 +291,7 @@ export default {
 
   .VueCarousel{
     z-index: 7;
-    flex: auto
+    flex: auto;
   }
   .materiContext{
     @extend #subContext;
