@@ -20,16 +20,33 @@ const { reactiveProp } = mixins
 export default {
   data(){
     return {
-      chartData: {
-        nilaiAgama: 0,
-        motorikHalus: 0,
-        motorikKasar: 0,
-        bahasa: 0,
-        kognitif: 0,
-        sosialEmosi: 0,
-        seni: 0,
-      },
-      muridId: this.$auth.user.id
+      chartData:{
+      labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+      datasets: [
+        {
+          label: 'Skor perkembangan anak',
+          backgroundColor: [
+                'rgba(255, 99, 132)',
+                'rgba(54, 162, 235)',
+                'rgba(255, 206, 86)',
+                'rgba(75, 192, 192)',
+                'rgba(153, 102, 255)',
+                'rgba(255, 159, 64)',
+                'rgb(70,189,135)'
+            ],
+          data: [0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+                ]
+        },
+      ]
+    },
+      muridId: 1
     }
   },
   methods: {
@@ -39,6 +56,7 @@ export default {
         muridId: self.muridId
       })
       .then(function(resp) {
+<<<<<<< HEAD
         self.chartData.motorikHalus = resp.motorik_halus
         self.chartData.motorikKasar = resp.motorik_kasar
         self.chartData.bahasa = resp.bahasa
@@ -50,6 +68,39 @@ export default {
         console.log(resp)
       })
     }    
+=======
+        //
+
+        this.chartData = {
+          labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+          datasets: [
+            {
+              label: 'Skor perkembangan anak',
+              backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
+                    'rgb(70,189,135)'
+                ],
+              data: [resp.nilaiAgama,
+                    resp.motorikHalus,
+                    resp.motorikKasar,
+                    resp.bahasa,
+                    resp.bahasa,
+                    resp.kognitif,
+                    resp.sosialEmosi,
+                    resp.seni
+                    ]
+            },
+          ]
+        }
+
+      })
+    },
+>>>>>>> origin/master
   },
   created(){
     this.fetchChartData()
