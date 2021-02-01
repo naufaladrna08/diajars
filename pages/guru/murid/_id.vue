@@ -25,12 +25,26 @@ export default {
         kognitif: 0,
         sosialEmosi: 0,
         seni: 0
-      }
+      },
+
+      muridId: this.$route.params.id
     }
   },
   methods:{
     fetchChartData(){
-      //masukin satu2 ke chartData
+      let self = this
+      this.$axios.$post('murid/get_statistic', {
+        muridId: self.muridId
+      })
+      .then(function(resp) {
+        self.chartData.nilaiAgama = resp.agama
+        self.chartData.motorikHalus = resp.motorik_halus
+        self.chartData.motorikKasar = resp.motorik_kasar
+        self.chartData.bahasa = resp.bahasa
+        self.chartData.kognitif = resp.kognitif
+        self.chartData.sosialEmosi = resp.sosial_emosi
+        self.chartData.seni = resp.seni
+      })
     }
   },
   created(){
