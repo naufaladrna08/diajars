@@ -7,52 +7,52 @@
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <i class="material-icons insight" @click="() => $router.push('/murid/statistik')">insights</i>
       <h1 class="choosetheme">Pilih tema</h1>
-      <div class="themecard" @click="onThemecardClick('Aku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aku + ')'}" @click="onThemecardClick('Aku')">
         <p>Aku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Lingkunganku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.lingkunganku + ')'}" @click="onThemecardClick('Lingkunganku')">
         <p>Lingkunganku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Binatang')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Tanaman')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.tanaman + ')'}" @click="onThemecardClick('Tanaman')">
         <p>Tanaman</p>
         <span class="batch">Tugas baru</span>
       </div>
       <!-- //semester 2 -->
-      <div class="themecard" @click="onThemecardClick('Rekreasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Kendaraan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kendaraan')">
         <p>Kendaraan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Pekerjaan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Pekerjaan')">
         <p>Pekerjaan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Api,air, udara')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Api,air, udara')">
         <p>Api,air, udara</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Alat komunikasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Negaraku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.negaraku + ')'}" @click="onThemecardClick('Negaraku')">
         <p>Negaraku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" @click="onThemecardClick('Alam semesta')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alamsemesta + ')'}" @click="onThemecardClick('Alam semesta')">
         <p>Alam semesta</p>
         <span class="batch">Tugas baru</span>
       </div>
@@ -76,7 +76,16 @@ export default {
           type: 'latihan',
           thumbnail: ''
         }
-      ]
+      ],
+      images: {
+        aku: require('@/assets/image/bitmap/thumbnails/materi/aku.png'),
+        lingkunganku: require('@/assets/image/bitmap/thumbnails/materi/lingkunganku.png'),
+        binatang: require('@/assets/image/bitmap/thumbnails/materi/binatang.png'),
+        tanaman: require('@/assets/image/bitmap/thumbnails/materi/tanaman.png'),
+        negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
+        alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
+        alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+      }
     }
   },
   methods:{
@@ -161,6 +170,7 @@ export default {
         bottom: 0;
         left: 50%;
         transform: translatex(-50%);
+        color: #fff;
       }
     }
   }
