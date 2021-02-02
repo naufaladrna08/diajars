@@ -56,19 +56,6 @@ export default {
         muridId: self.muridId
       })
       .then(function(resp) {
-<<<<<<< HEAD
-        self.chartData.motorikHalus = resp.motorik_halus
-        self.chartData.motorikKasar = resp.motorik_kasar
-        self.chartData.bahasa = resp.bahasa
-        self.chartData.kognitif = resp.kognitif
-        self.chartData.sosialEmosi = resp.sosial_emosi
-        self.chartData.seni = resp.seni
-        this.chartData.nilaiAgama = 5
-      
-        console.log(resp)
-      })
-    }    
-=======
         //
 
         this.chartData = {
@@ -100,7 +87,6 @@ export default {
 
       })
     },
->>>>>>> origin/master
   },
   created(){
     this.fetchChartData()
