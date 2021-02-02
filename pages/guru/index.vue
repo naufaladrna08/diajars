@@ -28,19 +28,19 @@
       </div>
 
       <h1 class="choosetheme">Pilih tema </h1>
-      <div class="themecard" @click="onThemecardClick('Aku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aku + ')'}" @click="onThemecardClick('Aku')">
         <p>Aku</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Lingkunganku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.lingkunganku + ')'}" @click="onThemecardClick('Lingkunganku')">
         <p>Lingkunganku</p>
       </div>
       <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Binatang')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Tanaman')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.tanaman + ')'}" @click="onThemecardClick('Tanaman')">
         <p>Tanaman</p>
       </div>
       <!-- //semester 2 -->
@@ -56,13 +56,13 @@
       <div class="themecard" @click="onThemecardClick('Api,air, udara')">
         <p>Api,air, udara</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Alat komunikasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Negaraku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.negaraku + ')'}" @click="onThemecardClick('Negaraku')">
         <p>Negaraku</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Alam semesta')">
+      <div class="themecard"  :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alamsemesta + ')'}" @click="onThemecardClick('Alam semesta')">
         <p>Alam semesta</p>
       </div>
     </div>
@@ -114,13 +114,10 @@
         <carousel :perPage="1" :paginationEnabled="false">
           <!-- <div> -->
             <slide v-for="materi in rawMateri" :key="materi.id">
-              <div class="materiContextMenu">
-                <!--
-                  TODO:
-                  Background: materi.thumbnail
-                  OnClick: materi.link
-                -->
-                {{ materi.nama }}
+              <div class="materiContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + materi.thumbnail + ')'}" @click="addTask(materi.id)">
+                <h1 class="text-center">
+                  {{ materi.nama }}
+                </h1>
               </div>
             </slide>
           <!-- </div> -->
@@ -164,7 +161,18 @@ export default {
       jenisKelas: 0,
       kodeKelas: 0,
       rawMateri: [{nama: 'ao',id:1},{nama: 'ao',id:2}],
-      rawGames: [{nama: 'ao',id:1},{nama: 'ao',id:2}]
+      rawGames: [{nama: 'ao',id:1},{nama: 'ao',id:2}],
+
+      images: {
+        aku: require('@/assets/image/bitmap/thumbnails/materi/aku.png'),
+        lingkunganku: require('@/assets/image/bitmap/thumbnails/materi/lingkunganku.png'),
+        binatang: require('@/assets/image/bitmap/thumbnails/materi/binatang.png'),
+        tanaman: require('@/assets/image/bitmap/thumbnails/materi/tanaman.png'),
+        negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
+        alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
+        alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+
+      }
     }
   },
   methods:{
@@ -173,7 +181,6 @@ export default {
     },
     onThemecardClick(theme){
       this.taskbarIsOpen = true
-
     },
     copyCode(){
       var copyText = document.getElementById("code");
@@ -222,6 +229,9 @@ export default {
       .then(function (resp) {
         self.rawGames = resp
       })
+    },
+    addTask(id) {
+      this.$swal('Tugas ' + id + ' berhasil ditambahkan!');
     }
   },
   created() {
@@ -360,6 +370,7 @@ export default {
         bottom: 0;
         left: 50%;
         transform: translatex(-50%);
+        color: #fff;
       }
     }
   }
@@ -446,5 +457,13 @@ export default {
   .latihan-icon {
     width: 128px;
     height: 128px;
+  }
+
+  .text-center {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translatex(-50%);
+    color: #fff;
   }
 </style>
