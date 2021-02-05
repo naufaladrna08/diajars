@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <div class="container">
-      <iframe src="http://localhost/count" scrollbar="no">  </iframe>
+      <iframe src="http://localhost/games/html" scrollbar="no">  </iframe>
     </div>
   </div>
 </template>
