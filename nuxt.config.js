@@ -65,11 +65,11 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://localhost:8000/'
+    baseURL: 'http://localhost:8000/api/',
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:8000/'
+    baseUrl: process.env.BASE_URL || 'http://localhost:8000/api/'
   },
 
   auth: {
