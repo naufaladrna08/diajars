@@ -1,7 +1,11 @@
 <template>
   <div class="container bg-yellow">
     <div class="taskbar">
-      <div class="task" v-for="task in tasks" :key="task.id"></div>
+      <!-- ᮊᮥᮓᮥᮔ ᮄᮄᮉ ᮒᮨᮂ ᮝᮧᮁᮊ᮪ -->
+      
+      <div class="task" @click="kerjakanTugas('Binatang', 'play/materi_binatang')"> M </div>
+      <div class="task" @click="kerjakanTugas('Mengenal Huruf', 'play/mengenal_huruf')"> G </div>
+      <!-- ばあみたい -->
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
@@ -15,10 +19,10 @@
         <p>Lingkunganku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kebutuhanku')">
+      <!-- <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
         <span class="batch">Tugas baru</span>
-      </div>
+      </div> -->
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
         <span class="batch">Tugas baru</span>
@@ -28,7 +32,7 @@
         <span class="batch">Tugas baru</span>
       </div>
       <!-- //semester 2 -->
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Rekreasi')">
+      <!-- <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
         <span class="batch">Tugas baru</span>
       </div>
@@ -43,7 +47,7 @@
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Api,air, udara')">
         <p>Api,air, udara</p>
         <span class="batch">Tugas baru</span>
-      </div>
+      </div> -->
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
         <span class="batch">Tugas baru</span>
@@ -69,14 +73,9 @@
 export default {
   data(){
     return {
+      muridId: 2,
       taskbarIsOpen: false,
-      tasks: [
-        {
-          id:1324,
-          type: 'latihan',
-          thumbnail: ''
-        }
-      ],
+      tasks: [],
       images: {
         aku: require('@/assets/image/bitmap/thumbnails/materi/aku.png'),
         lingkunganku: require('@/assets/image/bitmap/thumbnails/materi/lingkunganku.png'),
@@ -89,23 +88,40 @@ export default {
     }
   },
   methods:{
-    fetchMateri(){
-      //push data to task
-    },
-    fetchLatihan(){
-
-    },
     onThemecardClick(theme){
       this.taskbarIsOpen = true
     },
 
     logout() {
       this.$auth.logout()
+    },
+    fetchMateri() {
+      this.$axios.$post('/murid/get_class', {
+        muridId: this.$auth.user.id
+      })
+      .then((r1) => {
+        const data = new FormData
+        data.append('kodeKelas', r1.kodeKelas)
+
+        this.$axios.$post('materi/lihat_tugas', data)
+        .then((r2) => {
+          this.task = r2
+        })
+      })
+    },
+    kerjakanTugas(name, link) {
+      this.$swal.fire({
+        title: 'Kerjakan tugas: ' + name + '?',
+        confirmButtonText: 'Mulai'
+      }).then((confirmed) => {
+        if (confirmed) {
+          this.$router.push(link)
+        }
+      })
     }
   },
   created(){
     this.fetchMateri()
-    this.fetchLatihan()
   }
 }
 </script>
@@ -171,6 +187,8 @@ export default {
         left: 50%;
         transform: translatex(-50%);
         color: #fff;
+        padding: 10px;
+        background: #222222AA;
       }
     }
   }

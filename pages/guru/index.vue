@@ -4,8 +4,9 @@
       <div class="addTask" @click="() => contextIsOpen = true">
         <i class="material-icons">add</i>
       </div>
-      <div class="task"></div>
-      <div class="task"></div>
+      <div v-for="task in rawTugas" :key="task.id">
+        <div class="task"> {{ task.tipe.substring(0,1) }} </div>
+      </div>
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
@@ -34,9 +35,9 @@
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.lingkunganku + ')'}" @click="onThemecardClick('Lingkunganku')">
         <p>Lingkunganku</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
+      <!-- <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
-      </div>
+      </div> -->
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
       </div>
@@ -44,7 +45,7 @@
         <p>Tanaman</p>
       </div>
       <!-- //semester 2 -->
-      <div class="themecard" @click="onThemecardClick('Rekreasi')">
+      <!-- <div class="themecard" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
       </div>
       <div class="themecard" @click="onThemecardClick('Kendaraan')">
@@ -55,7 +56,7 @@
       </div>
       <div class="themecard" @click="onThemecardClick('Api,air, udara')">
         <p>Api,air, udara</p>
-      </div>
+      </div> -->
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
       </div>
@@ -114,10 +115,8 @@
         <carousel :perPage="1" :paginationEnabled="false">
           <!-- <div> -->
             <slide v-for="materi in rawMateri" :key="materi.id">
-              <div class="materiContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + materi.thumbnail + ')'}" @click="addTask(materi.id)">
-                <h1 class="text-center">
-                  {{ materi.nama }}
-                </h1>
+              <div class="materiContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + materi.thumbnail + ')'}" @click="addTask(materi.nama, materi.id, 'materi')">
+                <h1 class="carousel-title"> {{ materi.nama }} </h1>
               </div>
             </slide>
           <!-- </div> -->
@@ -132,17 +131,11 @@
 
         <carousel :perPage="1" :paginationEnabled="false">
             <slide v-for="game in rawGames" :key="game.id">
-              <div class="latihanContextMenu">
-                <!--
-                  TODO:
-                  Background: game.thumbnail
-                  OnClick: game.link
-                -->
-                {{ game.nama }}
+              <div class="latihanContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + game.thumbnail + ')'}" @click="addTask(game.nama, game.id, 'game')">
+                <h1 class="carousel-title"> {{ game.nama }} </h1>
               </div>
             </slide>
         </carousel>
-
     </div>
 
   </div>
@@ -162,6 +155,7 @@ export default {
       kodeKelas: 0,
       rawMateri: [{nama: 'ao',id:1},{nama: 'ao',id:2}],
       rawGames: [{nama: 'ao',id:1},{nama: 'ao',id:2}],
+      rawTugas: [],
 
       images: {
         aku: require('@/assets/image/bitmap/thumbnails/materi/aku.png'),
@@ -214,30 +208,74 @@ export default {
     },
     getMateri() {
       let self = this
-      this.$axios.$post('guru/get_materi', {
-        jenisKelas: self.jenisKelas
+
+      this.$axios.$post('/guru/check_class_state', {
+        guruId: this.guruId
       })
-      .then(function (resp) {
-        self.rawMateri = resp
+      .then((r1) => {
+        this.$axios.$post('guru/get_materi', {
+          jenisKelas: r1.jenisKelas
+        })
+        .then(function (resp) {
+          console.log(resp)
+          self.rawMateri = resp
+        })
       })
     },
     getGames() {
       let self = this
-      this.$axios.$post('guru/get_games', {
-        jenisKelas: self.jenisKelas
+
+      this.$axios.$post('/guru/check_class_state', {
+        guruId: this.guruId
       })
-      .then(function (resp) {
-        self.rawGames = resp
+      .then((r1) => {
+        this.$axios.$post('guru/get_games', {
+          jenisKelas: r1.jenisKelas
+        })
+        .then(function (resp) {
+          self.rawGames = resp
+        })
       })
     },
-    addTask(id) {
-      this.$swal('Tugas ' + id + ' berhasil ditambahkan!');
+    addTask(name, id, type) {
+      let self = this
+
+      this.$axios.$post('/guru/check_class_state', {
+        guruId: this.guruId
+      })
+      .then((r1) => {
+        const data = new FormData
+        data.append('nama', name)
+        data.append('tugasId', id)
+        data.append('kelasId', r1.id)
+        data.append('type', type)
+
+        this.$axios.$post('materi/tambah_tugas', data)
+        .then((r2) => {
+          this.$swal('Tugas ' + name + ' berhasil ditambahkan!');
+          this.getTasks()
+        })
+      })
+    },
+    getTasks() {
+      this.$axios.$post('/guru/check_class_state', {
+        guruId: self.guruId
+      })
+      .then((r1) => {
+        const data = new FormData
+        data.append('kodeKelas', this.kodeKelas)
+
+        this.$axios.$post('materi/lihat_tugas', data)
+        .then((r) => {
+          this.rawTugas = r        })
+      })
     }
   },
   created() {
     this.checkIsPremium()
     this.getMateri()
     this.getGames()
+    this.getTasks()
   }
 }
 </script>
@@ -371,6 +409,8 @@ export default {
         left: 50%;
         transform: translatex(-50%);
         color: #fff;
+        padding: 10px;
+        background: #222222AA;
       }
     }
   }
@@ -411,6 +451,8 @@ export default {
     background: white;
     margin: .5rem;
     border-radius: .5rem;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .blur{
@@ -465,5 +507,15 @@ export default {
     left: 50%;
     transform: translatex(-50%);
     color: #fff;
+  }
+
+  .carousel-title {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translatex(-50%);
+    color: #fff;
+    padding: 20px;
+    background: #222222AA;
   }
 </style>
