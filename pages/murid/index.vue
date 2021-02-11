@@ -2,9 +2,14 @@
   <div class="container bg-yellow">
     <div class="taskbar">
       <!-- ᮊᮥᮓᮥᮔ ᮄᮄᮉ ᮒᮨᮂ ᮝᮧᮁᮊ᮪ -->
-      
-      <div class="task" @click="kerjakanTugas('Binatang')"> M </div>
-      <div class="task" @click="kerjakanTugas('Mengenal Huruf', 'play/mengenal_huruf')"> G </div>
+      <div v-for="task in tasks" :key="task.id">
+        <div v-if="task.tipe === 'game'">
+          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+        </div>  
+        <div v-else>
+          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+        </div>
+      </div>
       <!-- ばあみたい -->
     </div>
 
@@ -84,6 +89,9 @@ export default {
         negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
         alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
         alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+
+        gameIcon: require('@/assets/image/vector/game-icon.png'),
+        materiIcon: require('@/assets/image/vector/materi-icon.png'),
       }
     }
   },
@@ -105,18 +113,29 @@ export default {
 
         this.$axios.$post('materi/lihat_tugas', data)
         .then((r2) => {
-          this.task = r2
+          this.tasks = r2
         })
       })
     },
-    kerjakanTugas(name, link) {
-      this.$swal.fire({
-        title: 'Kerjakan tugas: ' + name + '?',
-        confirmButtonText: 'Mulai'
-      }).then((confirmed) => {
-        if (confirmed) {
-          this.$router.push(link)
-        }
+    showTaskDetail(id, type) {
+      /* 
+       * Dapatkan informasi tugas (deskripsi, link) 
+       */
+
+      // Dapatkan materi/game dari task id
+      this.$axios.$post('materi/detail_tugas', {
+        tugasId: id,
+        type: type
+      }).then((resp) => {
+        this.$swal({
+          title: "Detail Tugas",
+          text: resp.nama,
+          showCancelButton: true
+        }).then((confirm) => {
+          if (confirm) {
+            this.$router.push(resp.link)
+          }
+        })
       })
     }
   },
@@ -215,7 +234,10 @@ export default {
     height: 2rem;
     background: white;
     margin: .5rem;
-    border-radius: .5rem;
+    border-radius: .6rem;
+    text-align: center;
+    text-transform: uppercase;
+    border: 3px solid white;
   }
 
   .insight{
