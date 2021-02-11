@@ -5,7 +5,12 @@
         <i class="material-icons">add</i>
       </div>
       <div v-for="task in rawTugas" :key="task.id">
-        <div class="task"> {{ task.tipe.substring(0,1) }} </div>
+        <div v-if="task.tipe === 'game'">
+          <div class="task" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+        </div>  
+        <div v-else>
+          <div class="task" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+        </div>
       </div>
     </div>
 
@@ -80,12 +85,14 @@
         contextMateriIsOpen = true
         }">
 
-        <img
-          :src="require(`~/assets/image/vector/Theory.svg`)"
-          alt="Theory Icon"
-          class="theory-icon"
-        />
-        <h1> Materi </h1>
+        <div class="label">
+          <img
+            :src="require(`~/assets/image/vector/Theory.svg`)"
+            alt="Theory Icon"
+            class="theory-icon"
+          />
+          <h1> Materi </h1>
+        </div>
 
         <svg width="121" height="108" viewBox="0 0 121 108" fill="none" class="blob__left" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.995 108L18 108C8.05888 108 0 99.9411 0 90L0 21.7694C1.17016 21.0134 2.32814 20.2502 3.46484 19.4734C6.13958 17.6453 8.79376 15.6087 11.4628 13.5607C20.9367 6.291 30.5974 -1.12201 42.0281 0.141639C50.5902 1.08816 56.1353 7.80593 61.8186 14.6911C65.7502 19.4542 69.748 24.2975 74.8565 27.3656C80.4928 30.7506 87.8112 32.0606 94.9617 33.3405C106.213 35.3545 117.049 37.2941 120.262 47.1272C123.408 56.7573 115.951 64.4996 108.186 72.5627C102.99 77.9573 97.6564 83.4954 95.2671 89.8385C93.1313 95.5088 92.9788 101.77 92.995 108Z" fill="#00C491"/></svg>
       </div>
@@ -95,12 +102,14 @@
         contextLatihanIsOpen = true
         }">
 
-        <img
-          :src="require(`~/assets/image/vector/Games.svg`)"
-          alt="Latihan Icon"
-          class="latihan-icon"
-        />
-        <h1> Latihan </h1>
+        <div class="label">
+          <img
+            :src="require(`~/assets/image/vector/Games.svg`)"
+            alt="Latihan Icon"
+            class="latihan-icon"
+          />
+          <h1> Latihan </h1>
+        </div>
 
         <svg width="99" height="99" viewBox="0 0 99 99" fill="none" xmlns="http://www.w3.org/2000/svg" class="blob__right"><path fill-rule="evenodd" clip-rule="evenodd" d="M99 4.28351L99 81C99 90.9411 90.9411 99 81 99L0.556617 99C0.441699 98.5481 0.341397 98.0874 0.256331 97.6176C-1.37609 88.6025 5.06571 81.643 11.7128 74.4618C16.7992 68.9667 22.0058 63.3417 23.8068 56.5664C25.7415 49.2882 23.9442 41.017 22.1962 32.9725C19.7954 21.9233 17.4874 11.3018 25.0702 4.2687C33.0394 -3.12272 44.0833 0.551417 55.4726 4.34043C62.1055 6.54708 68.8555 8.7927 75.1835 8.91423C81.3867 9.03337 87.8952 7.26831 94.3018 5.5309C95.876 5.10398 97.4441 4.67873 99 4.28351Z" fill="#F7BE3A"/></svg>
       </div>
@@ -166,6 +175,8 @@ export default {
         alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
         alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
 
+        gameIcon: require('@/assets/image/vector/game-icon.png'),
+        materiIcon: require('@/assets/image/vector/materi-icon.png'),
       }
     }
   },
@@ -188,7 +199,20 @@ export default {
     },
 
     logout() {
-      this.$auth.logout()
+      this.$swal({
+        title: 'Konfirmasi',
+        text: 'Apa anda yakin akan keluar?',
+        showCancelButton: true,
+        type: 'warning',
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak',
+        showCloseButton: true,
+        showLoaderOnConfirm: true
+      }).then((result) => {
+        if (result.value) {
+          this.$auth.logout()
+        }
+      }) 
     },
     checkIsPremium() {
       let self = this
@@ -240,22 +264,39 @@ export default {
     addTask(name, id, type) {
       let self = this
 
-      this.$axios.$post('/guru/check_class_state', {
-        guruId: this.guruId
-      })
-      .then((r1) => {
-        const data = new FormData
-        data.append('nama', name)
-        data.append('tugasId', id)
-        data.append('kelasId', r1.id)
-        data.append('type', type)
+      this.$swal({
+        title: 'Konfirmasi',
+        html:
+          'Tambahkan tugas <b> '+ name +' </b> kepada Siswa?',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Tambahkan',
+        cancelButtonText: 'Jangan',
+      }).then((result) => {
+        if (result.value) {
+          this.$axios.$post('/guru/check_class_state', {
+            guruId: this.guruId
+          })
+          .then((r1) => {
+            const data = new FormData
+            data.append('nama', name)
+            data.append('tugasId', id)
+            data.append('kelasId', r1.id)
+            data.append('type', type)
 
-        this.$axios.$post('materi/tambah_tugas', data)
-        .then((r2) => {
-          this.$swal('Tugas ' + name + ' berhasil ditambahkan!');
-          this.getTasks()
-        })
+            this.$axios.$post('materi/tambah_tugas', data)
+            .then((r2) => {
+              this.$swal('Tugas ' + name + ' berhasil ditambahkan!', '', 'success');
+              this.getTasks()
+            })
+          })
+        } else {
+          this.$swal('Dibatalkan', '', 'success');
+        }
       })
+
+      
     },
     getTasks() {
       this.$axios.$post('/guru/check_class_state', {
@@ -267,7 +308,8 @@ export default {
 
         this.$axios.$post('materi/lihat_tugas', data)
         .then((r) => {
-          this.rawTugas = r        })
+          this.rawTugas = r        
+        })
       })
     }
   },
@@ -291,11 +333,17 @@ export default {
 
     .contextMenu{
       position: relative;
-      width: 13rem;
+      width: 18rem;
       border-radius: 1.5rem;
-      height: calc(100% - 4rem);
+      height: calc(100% - 10rem);
       z-index: 5;
+      text-align: center;
       margin: auto;
+
+      .label {
+        transform: translateY(80%);
+        color: #222;
+      }
     }
   }
 
@@ -450,9 +498,10 @@ export default {
     height: 2rem;
     background: white;
     margin: .5rem;
-    border-radius: .5rem;
+    border-radius: .6rem;
     text-align: center;
     text-transform: uppercase;
+    border: 3px solid white;
   }
 
   .blur{

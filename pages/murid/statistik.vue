@@ -21,31 +21,30 @@ export default {
   data(){
     return {
       chartData:{
-      labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
-      datasets: [
-        {
-          label: 'Skor perkembangan anak',
-          backgroundColor: [
-                'rgba(255, 99, 132)',
-                'rgba(54, 162, 235)',
-                'rgba(255, 206, 86)',
-                'rgba(75, 192, 192)',
-                'rgba(153, 102, 255)',
-                'rgba(255, 159, 64)',
-                'rgb(70,189,135)'
-            ],
-          data: [0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-                ]
-        },
-      ]
-    },
+        labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+        datasets: [
+          {
+            label: 'Skor perkembangan anak',
+            backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 235)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)',
+                  'rgb(70,189,135)'
+              ],
+            data: [0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                  ]
+          },
+        ]
+      },
       muridId: 1
     }
   },
@@ -53,12 +52,12 @@ export default {
     fetchChartData(){
       let self = this
       this.$axios.$post('murid/get_statistic', {
-        muridId: self.muridId
+        muridId: this.$auth.user.id
       })
       .then(function(resp) {
-        //
+        console.log(resp.agama)
 
-        this.chartData = {
+        self.chartData = {
           labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
           datasets: [
             {
@@ -72,19 +71,17 @@ export default {
                     'rgba(255, 159, 64)',
                     'rgb(70,189,135)'
                 ],
-              data: [resp.nilaiAgama,
-                    resp.motorikHalus,
-                    resp.motorikKasar,
-                    resp.bahasa,
+              data: [resp.agama,
+                    resp.motorik_halus,
+                    resp.motorik_kasar,
                     resp.bahasa,
                     resp.kognitif,
-                    resp.sosialEmosi,
+                    resp.sosial_emosi,
                     resp.seni
-                    ]
+                  ]
             },
           ]
         }
-
       })
     },
   },

@@ -3,7 +3,7 @@
     <div class="taskbar">
       <!-- ᮊᮥᮓᮥᮔ ᮄᮄᮉ ᮒᮨᮂ ᮝᮧᮁᮊ᮪ -->
       
-      <div class="task" @click="kerjakanTugas('Binatang', 'play/materi_binatang')"> M </div>
+      <div class="task" @click="kerjakanTugas('Binatang')"> M </div>
       <div class="task" @click="kerjakanTugas('Mengenal Huruf', 'play/mengenal_huruf')"> G </div>
       <!-- ばあみたい -->
     </div>

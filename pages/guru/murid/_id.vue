@@ -17,27 +17,68 @@
 export default {
   data(){
     return {
-      chartData: {
-        
+      chartData:{
+        labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+        datasets: [
+          {
+            label: 'Skor perkembangan anak',
+            backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 235)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)',
+                  'rgb(70,189,135)'
+              ],
+            data: [0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                  ]
+          },
+        ]
       },
-
-      muridId: this.$route.params.id
+      muridId: 1
     }
   },
   methods:{
     fetchChartData(){
       let self = this
+
       this.$axios.$post('murid/get_statistic', {
-        muridId: self.muridId
+        muridId: this.$route.params.id
       })
       .then(function(resp) {
-        self.chartData.nilaiAgama = resp.agama
-        self.chartData.motorikHalus = resp.motorik_halus
-        self.chartData.motorikKasar = resp.motorik_kasar
-        self.chartData.bahasa = resp.bahasa
-        self.chartData.kognitif = resp.kognitif
-        self.chartData.sosialEmosi = resp.sosial_emosi
-        self.chartData.seni = resp.seni
+        console.log(self.$route.path)
+        self.chartData = {
+          labels: ['Nilai Agama', 'Motorik halus','Motorik kasar','Bahasa','Kognitif','Sosial emosi','Seni'],
+          datasets: [
+            {
+              label: 'Skor perkembangan anak',
+              backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(153, 102, 255)',
+                    'rgba(255, 159, 64)',
+                    'rgb(70,189,135)'
+                ],
+              data: [resp.agama,
+                    resp.motorik_halus,
+                    resp.motorik_kasar,
+                    resp.bahasa,
+                    resp.kognitif,
+                    resp.sosial_emosi,
+                    resp.seni
+                  ]
+            },
+          ]
+        }
       })
     }
   },
