@@ -6,10 +6,10 @@
       </div>
       <div v-for="task in rawTugas" :key="task.id">
         <div v-if="task.tipe === 'game'">
-          <div class="task" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
         </div>  
         <div v-else>
-          <div class="task" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
         </div>
       </div>
     </div>
@@ -185,7 +185,42 @@ export default {
       this.$router.push('/upgrade_class')
     },
     onThemecardClick(theme){
-      this.taskbarIsOpen = true
+      if (this.taskbarIsOpen != true) {
+        this.taskbarIsOpen = true
+      }  
+      
+
+      let text = ''
+      switch (theme) {
+        case 'Aku':
+          text = "Pada tema ini, siswa akan diajarkan mengenai bagian-bagian tubuh manusia"
+          break
+        case 'Lingkunganku':
+          text = "Pada tema ini, siswa akan diperkenalkan macam-macam benda yang ada di lingkungan kita"
+          break;
+        case 'Binatang':
+          text = "Pada tema ini, siswa akan diperkenalkan macam-macam binatang yang ada di dunia"
+          break
+        case 'Tanaman':
+          text = "Pada tema ini, siswa akan diperkenalkan macam-macam tumbuhan yang ada di dunia"
+          break
+        case 'Alat komunikasi':
+          text = "Pada tema ini, siswa akan diajarkan alat komunikasi"
+          break
+        case 'Negaraku':
+          text = "Pada tema ini, siswa akan diperkenalkan dengan negara kita dan diajarkan untuk mencintai Indonesia"
+          break
+        case 'Alam Semesta':
+          text = "Pada tema ini, siswa akan diajarkan materi mengenai alam semesta"
+          break
+      }
+
+      this.$swal({
+        title: 'Deskripsi: ' + theme,
+        text: text,
+        type: 'warning',
+        showLoaderOnConfirm: true
+      })
     },
     copyCode(){
       var copyText = document.getElementById("code");
@@ -311,6 +346,9 @@ export default {
           this.rawTugas = r        
         })
       })
+    },
+    showTaskDetail(task) {
+      this.$swal('Ingfo', task, 'info')
     }
   },
   created() {
