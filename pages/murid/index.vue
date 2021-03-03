@@ -10,7 +10,6 @@
           <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
         </div>
       </div>
-      <!-- ばあみたい -->
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
@@ -24,10 +23,10 @@
         <p>Lingkunganku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <!-- <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kebutuhanku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kebutuhanku + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
         <span class="batch">Tugas baru</span>
-      </div> -->
+      </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
         <span class="batch">Tugas baru</span>
@@ -37,22 +36,22 @@
         <span class="batch">Tugas baru</span>
       </div>
       <!-- //semester 2 -->
-      <!-- <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Rekreasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.rekreasi + ')'}" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kendaraan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kendaraan + ')'}" @click="onThemecardClick('Kendaraan')">
         <p>Kendaraan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Pekerjaan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.pekerjaan + ')'}" @click="onThemecardClick('Pekerjaan')">
         <p>Pekerjaan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Api,air, udara')">
-        <p>Api,air, udara</p>
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aau + ')'}" @click="onThemecardClick('Api,air, udara')">
+        <p>Api, air, udara</p>
         <span class="batch">Tugas baru</span>
-      </div> -->
+      </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
         <span class="batch">Tugas baru</span>
@@ -89,6 +88,11 @@ export default {
         negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
         alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
         alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+        aau: require('@/assets/image/bitmap/thumbnails/materi/aau.png'),
+        kebutuhanku: require('@/assets/image/bitmap/thumbnails/materi/kebutuhanku.png'),
+        pekerjaan: require('@/assets/image/bitmap/thumbnails/materi/pekerjaan.png'),
+        kendaraan: require('@/assets/image/bitmap/thumbnails/materi/kendaraan.png'),
+        rekreasi: require('@/assets/image/bitmap/thumbnails/materi/rekreasi.png'),
 
         gameIcon: require('@/assets/image/vector/game-icon.png'),
         materiIcon: require('@/assets/image/vector/materi-icon.png'),
@@ -127,9 +131,18 @@ export default {
         tugasId: id,
         type: type
       }).then((resp) => {
+        let tugas
+        if (type == "materi") {
+          tugas = "Membaca materi"
+        } else {
+          tugas = "Menyelesaikan permainan"
+        }
+
+        console.log(id)
+
         this.$swal({
           title: "Detail Tugas",
-          text: resp.nama,
+          html: "<p style='text-align: left'> Hi! <br><br> Kamu mempunya tugas baru: <br>  Tugas: " + tugas + " tentang " + resp.nama +"</p>",
           showCancelButton: true
         }).then((confirm) => {
           if (confirm) {

@@ -40,9 +40,9 @@
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.lingkunganku + ')'}" @click="onThemecardClick('Lingkunganku')">
         <p>Lingkunganku</p>
       </div>
-      <!-- <div class="themecard" @click="onThemecardClick('Kebutuhanku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kebutuhanku + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
-      </div> -->
+      </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
       </div>
@@ -50,18 +50,18 @@
         <p>Tanaman</p>
       </div>
       <!-- //semester 2 -->
-      <!-- <div class="themecard" @click="onThemecardClick('Rekreasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.rekreasi + ')'}"  @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Kendaraan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kendaraan + ')'}" @click="onThemecardClick('Kendaraan')">
         <p>Kendaraan</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Pekerjaan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.pekerjaan + ')'}" @click="onThemecardClick('Pekerjaan')">
         <p>Pekerjaan</p>
       </div>
-      <div class="themecard" @click="onThemecardClick('Api,air, udara')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aau + ')'}" @click="onThemecardClick('Api,air, udara')">
         <p>Api,air, udara</p>
-      </div> -->
+      </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
       </div>
@@ -174,6 +174,11 @@ export default {
         negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
         alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
         alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+        aau: require('@/assets/image/bitmap/thumbnails/materi/aau.png'),
+        kebutuhanku: require('@/assets/image/bitmap/thumbnails/materi/kebutuhanku.png'),
+        pekerjaan: require('@/assets/image/bitmap/thumbnails/materi/pekerjaan.png'),
+        kendaraan: require('@/assets/image/bitmap/thumbnails/materi/kendaraan.png'),
+        rekreasi: require('@/assets/image/bitmap/thumbnails/materi/rekreasi.png'),
 
         gameIcon: require('@/assets/image/vector/game-icon.png'),
         materiIcon: require('@/assets/image/vector/materi-icon.png'),
@@ -188,39 +193,38 @@ export default {
       if (this.taskbarIsOpen != true) {
         this.taskbarIsOpen = true
       }  
-      
 
-      let text = ''
-      switch (theme) {
-        case 'Aku':
-          text = "Pada tema ini, siswa akan diajarkan mengenai bagian-bagian tubuh manusia"
-          break
-        case 'Lingkunganku':
-          text = "Pada tema ini, siswa akan diperkenalkan macam-macam benda yang ada di lingkungan kita"
-          break;
-        case 'Binatang':
-          text = "Pada tema ini, siswa akan diperkenalkan macam-macam binatang yang ada di dunia"
-          break
-        case 'Tanaman':
-          text = "Pada tema ini, siswa akan diperkenalkan macam-macam tumbuhan yang ada di dunia"
-          break
-        case 'Alat komunikasi':
-          text = "Pada tema ini, siswa akan diajarkan alat komunikasi"
-          break
-        case 'Negaraku':
-          text = "Pada tema ini, siswa akan diperkenalkan dengan negara kita dan diajarkan untuk mencintai Indonesia"
-          break
-        case 'Alam Semesta':
-          text = "Pada tema ini, siswa akan diajarkan materi mengenai alam semesta"
-          break
-      }
+      // let text = ''
+      // switch (theme) {
+      //   case 'Aku':
+      //     text = "Pada tema ini, siswa akan diajarkan mengenai bagian-bagian tubuh manusia"
+      //     break
+      //   case 'Lingkunganku':
+      //     text = "Pada tema ini, siswa akan diperkenalkan macam-macam benda yang ada di lingkungan kita"
+      //     break;
+      //   case 'Binatang':
+      //     text = "Pada tema ini, siswa akan diperkenalkan macam-macam binatang yang ada di dunia"
+      //     break
+      //   case 'Tanaman':
+      //     text = "Pada tema ini, siswa akan diperkenalkan macam-macam tumbuhan yang ada di dunia"
+      //     break
+      //   case 'Alat komunikasi':
+      //     text = "Pada tema ini, siswa akan diajarkan alat komunikasi"
+      //     break
+      //   case 'Negaraku':
+      //     text = "Pada tema ini, siswa akan diperkenalkan dengan negara kita dan diajarkan untuk mencintai Indonesia"
+      //     break
+      //   case 'Alam Semesta':
+      //     text = "Pada tema ini, siswa akan diajarkan materi mengenai alam semesta"
+      //     break
+      // }
 
-      this.$swal({
-        title: 'Deskripsi: ' + theme,
-        text: text,
-        type: 'warning',
-        showLoaderOnConfirm: true
-      })
+      // this.$swal({
+      //   title: 'Deskripsi: ' + theme,
+      //   text: text,
+      //   type: 'warning',
+      //   showLoaderOnConfirm: true
+      // })
     },
     copyCode(){
       var copyText = document.getElementById("code");
@@ -348,7 +352,13 @@ export default {
       })
     },
     showTaskDetail(task) {
-      this.$swal('Ingfo', task, 'info')
+      this.$swal({
+        title: "Detail Tugas",
+        html: "<p> Anda menambahkan tugas <b> " + task + " </b> kepada siswa. </p>",
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: "Hapus"
+      })
     }
   },
   created() {
