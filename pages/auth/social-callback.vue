@@ -15,10 +15,9 @@ export default {
 		await this.$auth.login({data: {
 			token: this.token
 		}}).catch((e) => {
-			console.log(e)
+			console.log(e)	
 		})
 
-		console.log(this.token)		
 		switch (this.$auth.user.jenisAkun) {
 			case 'guru':
 				this.$router.push('/guru')
