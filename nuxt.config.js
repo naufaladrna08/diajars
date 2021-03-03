@@ -15,7 +15,7 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
-      }
+      },
     ]
   },
 
@@ -66,6 +66,8 @@ export default {
 
   axios: {
     baseURL: 'http://localhost:8000/api/',
+    proxyHeaders: false,
+    credentials: false
   },
 
   env: {
