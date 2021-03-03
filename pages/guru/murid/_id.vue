@@ -3,6 +3,11 @@
   <div class="container bg-red">
     <div class="infoSiswa">
       <Button bg="white" class="back_button" v-on:buttonClick="() => $router.push('/guru/murid')" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
+      <div class="datamuridContainer">
+        <p>Nama</p><p class="data">[Nama]</p>
+        <p>JK</p><p class="data">[Gender]</p>
+        <p>Umur</p><p class="data">[Umur]</p>
+      </div>
     </div>
     <div class="whiteBox">
       Perkembangan siswa
@@ -92,6 +97,22 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+}
+.datamuridContainer{
+  margin: auto;
+  margin-left: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  p, .data{
+    color: white;
+    width: 30%;
+  }
+  .data{
+    width: 70%;
+    text-align: right;
+  }
 }
 .back_button{
   width: 32px !important;
