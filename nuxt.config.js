@@ -91,7 +91,7 @@ export default {
             url: '/login', method: 'post', propertyName: 'token'
           },
           user: {
-            url: '/me', method: 'get', propertyName: 'data'
+            url: '/mes', method: 'get', propertyName: 'data'
           },
           logout: {
             method: 'get',
