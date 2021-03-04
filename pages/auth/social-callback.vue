@@ -33,7 +33,6 @@
 // }
 
 export default {
-  middleware: ['guest'],
   data() {
     return {
       token: this.$route.query.token ? this.$route.query.token : null
