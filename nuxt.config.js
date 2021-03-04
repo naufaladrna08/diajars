@@ -83,7 +83,8 @@ export default {
         token: {
           property: 'token',
           required: true,
-          type: 'Bearer'
+          type: 'Bearer',
+          maxAge: 60 * 60
         },
         user: {
           property: 'data',
