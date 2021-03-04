@@ -18,6 +18,8 @@ export default {
 			console.log(e)	
 		})
 
+		console.log(this.$auth.user.jenisAkun)
+
 		switch (this.$auth.user.jenisAkun) {
 			case 'guru':
 				this.$router.push('/guru')
