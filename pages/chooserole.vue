@@ -23,13 +23,14 @@ export default {
   methods: {
     //Method to use when the user click "Masuk sebagai murid" button
     loginAsMurid(){
-      //action here
+      this.$router.push('datadiri_murid')
     },
     //Method to use when the user click "Masuk sebagai guru" button
     loginAsGuru(){
-      //action here
+      this.$router.push('datadiri_guru')
     }
-  }
+  },
+  auth: false
 }
 </script>
 

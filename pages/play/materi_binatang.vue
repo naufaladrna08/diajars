@@ -1,7 +1,10 @@
 <template>
   <div id="root">
     <div class="container">
-      <iframe src="http://localhost/games/html" scrollbar="no">  </iframe>
+      <video width="320" height="240" controls>
+        <source src="http://localhost/materi/Dadang Diajars TK A 1 scene 1, 3+4 [preview 1].mp4" type="video/mp4">
+        Your browser does not support the video tag.
+</video>
     </div>
   </div>
 </template>
@@ -25,7 +28,7 @@ export default {
   box-sizing: border-box;
 }
 
-iframe {
+video {
   width: 100%;
   height: 100%;
   border: 0;

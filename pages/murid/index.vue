@@ -1,7 +1,15 @@
 <template>
   <div class="container bg-yellow">
     <div class="taskbar">
-      <div class="task" v-for="task in tasks" :key="task.id"></div>
+      <!-- ᮊᮥᮓᮥᮔ ᮄᮄᮉ ᮒᮨᮂ ᮝᮧᮁᮊ᮪ -->
+      <div v-for="task in tasks" :key="task.id">
+        <div v-if="task.tipe === 'game'">
+          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+        </div>  
+        <div v-else>
+          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+        </div>
+      </div>
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
@@ -15,7 +23,7 @@
         <p>Lingkunganku</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kebutuhanku')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kebutuhanku + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
         <span class="batch">Tugas baru</span>
       </div>
@@ -28,20 +36,20 @@
         <span class="batch">Tugas baru</span>
       </div>
       <!-- //semester 2 -->
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Rekreasi')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.rekreasi + ')'}" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Kendaraan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kendaraan + ')'}" @click="onThemecardClick('Kendaraan')">
         <p>Kendaraan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Pekerjaan')">
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.pekerjaan + ')'}" @click="onThemecardClick('Pekerjaan')">
         <p>Pekerjaan</p>
         <span class="batch">Tugas baru</span>
       </div>
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Api,air, udara')">
-        <p>Api,air, udara</p>
+      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aau + ')'}" @click="onThemecardClick('Api,air, udara')">
+        <p>Api, air, udara</p>
         <span class="batch">Tugas baru</span>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
@@ -69,14 +77,9 @@
 export default {
   data(){
     return {
+      muridId: 2,
       taskbarIsOpen: false,
-      tasks: [
-        {
-          id:1324,
-          type: 'latihan',
-          thumbnail: ''
-        }
-      ],
+      tasks: [],
       images: {
         aku: require('@/assets/image/bitmap/thumbnails/materi/aku.png'),
         lingkunganku: require('@/assets/image/bitmap/thumbnails/materi/lingkunganku.png'),
@@ -85,27 +88,72 @@ export default {
         negaraku: require('@/assets/image/bitmap/thumbnails/materi/negaraku.png'),
         alatkomunikasi: require('@/assets/image/bitmap/thumbnails/materi/alatkomunikasi.png'),
         alamsemesta: require('@/assets/image/bitmap/thumbnails/materi/alamsemesta.png'),
+        aau: require('@/assets/image/bitmap/thumbnails/materi/aau.png'),
+        kebutuhanku: require('@/assets/image/bitmap/thumbnails/materi/kebutuhanku.png'),
+        pekerjaan: require('@/assets/image/bitmap/thumbnails/materi/pekerjaan.png'),
+        kendaraan: require('@/assets/image/bitmap/thumbnails/materi/kendaraan.png'),
+        rekreasi: require('@/assets/image/bitmap/thumbnails/materi/rekreasi.png'),
+
+        gameIcon: require('@/assets/image/vector/game-icon.png'),
+        materiIcon: require('@/assets/image/vector/materi-icon.png'),
       }
     }
   },
   methods:{
-    fetchMateri(){
-      //push data to task
-    },
-    fetchLatihan(){
-
-    },
     onThemecardClick(theme){
       this.taskbarIsOpen = true
     },
 
     logout() {
       this.$auth.logout()
+    },
+    fetchMateri() {
+      this.$axios.$post('/murid/get_class', {
+        muridId: this.$auth.user.id
+      })
+      .then((r1) => {
+        const data = new FormData
+        data.append('kodeKelas', r1.kodeKelas)
+
+        this.$axios.$post('materi/lihat_tugas', data)
+        .then((r2) => {
+          this.tasks = r2
+        })
+      })
+    },
+    showTaskDetail(id, type) {
+      /* 
+       * Dapatkan informasi tugas (deskripsi, link) 
+       */
+
+      // Dapatkan materi/game dari task id
+      this.$axios.$post('materi/detail_tugas', {
+        tugasId: id,
+        type: type
+      }).then((resp) => {
+        let tugas
+        if (type == "materi") {
+          tugas = "Membaca materi"
+        } else {
+          tugas = "Menyelesaikan permainan"
+        }
+
+        console.log(id)
+
+        this.$swal({
+          title: "Detail Tugas",
+          html: "<p style='text-align: left'> Hi! <br><br> Kamu mempunya tugas baru: <br>  Tugas: " + tugas + " tentang " + resp.nama +"</p>",
+          showCancelButton: true
+        }).then((confirm) => {
+          if (confirm) {
+            this.$router.push(resp.link)
+          }
+        })
+      })
     }
   },
   created(){
     this.fetchMateri()
-    this.fetchLatihan()
   }
 }
 </script>
@@ -171,6 +219,8 @@ export default {
         left: 50%;
         transform: translatex(-50%);
         color: #fff;
+        padding: 10px;
+        background: #222222AA;
       }
     }
   }
@@ -197,7 +247,10 @@ export default {
     height: 2rem;
     background: white;
     margin: .5rem;
-    border-radius: .5rem;
+    border-radius: .6rem;
+    text-align: center;
+    text-transform: uppercase;
+    border: 3px solid white;
   }
 
   .insight{

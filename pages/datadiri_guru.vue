@@ -86,7 +86,7 @@ export default {
         .catch(error => {
           console.log("ERRRR:: ", error.response.data);
           this.errMessage = error.response.data
-        });
+      });
     },
     onFileChange(e) {
       const file = e.target.files[0];

@@ -15,7 +15,7 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
-      }
+      },
     ]
   },
 
@@ -65,11 +65,13 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://30.220.56.66/api/'
+    baseURL: 'http://31.220.58.66:8888/api/',
+    proxyHeaders: false,
+    credentials: false
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://30.220.56.66/api/'
+    baseUrl: process.env.BASE_URL || 'http://31.220.58.66:8888/api/'
   },
 
   auth: {

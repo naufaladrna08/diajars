@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <div class="container">
-      <iframe src="http://localhost/games/html" scrollbar="no">  </iframe>
+      <iframe src="http://localhost/games/mengenal_huruf/" scrollbar="no">  </iframe>
     </div>
   </div>
 </template>

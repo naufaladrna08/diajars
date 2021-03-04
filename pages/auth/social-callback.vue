@@ -15,7 +15,7 @@ export default {
 		await this.$auth.login({data: {
 			token: this.token
 		}}).catch((e) => {
-			console.log(e)
+			console.log(e)	
 		})
 
 		switch (this.$auth.user.jenisAkun) {
