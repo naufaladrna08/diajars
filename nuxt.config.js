@@ -65,13 +65,13 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://31.220.58.66:8888/api/',
+    baseURL: 'http://api.diajars.online/index.php/api/',
     proxyHeaders: false,
     credentials: false
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://31.220.58.66:8888/api/'
+    baseUrl: process.env.BASE_URL || 'http://api.diajars.online/index.php/api/'
   },
 
   auth: {
