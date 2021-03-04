@@ -41,9 +41,8 @@ export default {
   mounted() {
   	this.$auth.strategy.token.set('local', 'Bearer ' + this.token)
     this.$auth.setStrategy('local')
+    console.log(this.token)
     this.$auth.fetchUser().then(() => {
-
-    	console.log(this.token)
 	    switch (this.$auth.user.jenisAkun) {
 				case 'guru':
 					this.$router.push('/guru')
