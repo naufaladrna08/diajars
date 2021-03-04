@@ -91,9 +91,16 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'token' },
-          user: { url: '/me', method: 'get', propertyName: 'data' },
-          logout: { method: 'get', url: '/logout', method: 'get' }
+          login: {
+            url: '/login', method: 'post', propertyName: 'token'
+          },
+          user: {
+            url: '/me', method: 'get', propertyName: 'data'
+          },
+          logout: {
+            method: 'get',
+            url: '/logout', method: 'get'
+          }
         }
       }
     }
