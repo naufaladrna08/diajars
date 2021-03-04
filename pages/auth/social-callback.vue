@@ -43,7 +43,7 @@ export default {
     this.$auth.setStrategy('local')
     this.$auth.fetchUser().then(() => {
 
-    	console.log(token)
+    	console.log(this.token)
 	    switch (this.$auth.user.jenisAkun) {
 				case 'guru':
 					this.$router.push('/guru')
