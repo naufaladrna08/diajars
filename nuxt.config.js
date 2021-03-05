@@ -86,12 +86,16 @@ export default {
           type: 'Bearer',
           maxAge: 60 * 60
         },
+        user: {
+          property: 'data',
+          // autoFetch: true
+        },
         endpoints: {
           login: {
             url: '/login', method: 'post', propertyName: 'token'
           },
           user: {
-            url: '/mes', method: 'get', propertyName: 'data'
+            url: '/me', method: 'get', propertyName: 'data'
           },
           logout: {
             method: 'get',
