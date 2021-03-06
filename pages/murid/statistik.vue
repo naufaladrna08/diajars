@@ -4,9 +4,9 @@
     <div class="infoSiswa">
       <Button bg="white" class="back_button" v-on:buttonClick="() => $router.push('/murid')" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
       <div class="datamuridContainer">
-        <p>Nama</p><p class="data">[Nama]</p>
-        <p>JK</p><p class="data">[Gender]</p>
-        <p>Umur</p><p class="data">[Umur]</p>
+        <p>Nama</p><p class="data">{{ userdata.nama }}</p>
+        <p>JK</p><p class="data">{{ userdata.jenisKelamin }}</p>
+        <p>Umur</p><p class="data">{{ userdata.umur }}</p>
       </div>
     </div>
     <div class="whiteBox">
@@ -50,7 +50,12 @@ export default {
           },
         ]
       },
-      muridId: 1
+      muridId: 1,
+      userdata: {
+        nama: "",
+        jenisKelamin: "",
+        umur: ""
+      }
     }
   },
   methods: {
@@ -89,9 +94,15 @@ export default {
         }
       })
     },
+    fetchUserdata() {
+      this.userdata.nama = this.$auth.user.nama
+      this.userdata.jenisKelamin = this.$auth.user.jenisKelamin
+      this.userdata.umur = this.$auth.user.umur
+    },
   },
   created(){
     this.fetchChartData()
+    this.fetchUserdata()
   }
 }
 </script>

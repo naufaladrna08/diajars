@@ -4,9 +4,9 @@
     <div class="infoSiswa">
       <Button bg="white" class="back_button" v-on:buttonClick="() => $router.push('/guru/murid')" :noShadow="true"><i class="material-icons">chevron_left</i></Button>
       <div class="datamuridContainer">
-        <p>Nama</p><p class="data">[Nama]</p>
-        <p>JK</p><p class="data">[Gender]</p>
-        <p>Umur</p><p class="data">[Umur]</p>
+        <p>Nama</p><p class="data">{{ userdata.nama }}</p>
+        <p>JK</p><p class="data">{{ userdata.jenisKelamin }}</p>
+        <p>Umur</p><p class="data">{{ userdata.umur }}</p>
       </div>
     </div>
     <div class="whiteBox">
@@ -47,7 +47,12 @@ export default {
           },
         ]
       },
-      muridId: 1
+      muridId: 1,
+      userdata: {
+        nama: "",
+        jenisKelamin: "",
+        umur: ""
+      }
     }
   },
   methods:{
@@ -85,10 +90,21 @@ export default {
           ]
         }
       })
-    }
+    },
+    fetchUserdata() {
+      let self = this
+      this.$axios.$post('murid/get_data', {
+        muridId: this.$route.params.id
+      }).then((resp) => {
+        self.userdata.nama = resp.nama
+        self.userdata.jenisKelamin = resp.jenisKelamin
+        self.userdata.umur = resp.umur
+      })      
+    },
   },
   mounted(){
     this.fetchChartData()
+    this.fetchUserdata()
   }
 }
 </script>
