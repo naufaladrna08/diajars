@@ -68,7 +68,7 @@ export default {
     baseURL: 'http://api.diajars.online/index.php/api/',
     proxyHeaders: false,
     credentials: false
-  },
+  },  
 
   env: {
     baseUrl: process.env.BASE_URL || 'http://api.diajars.online/index.php/api/'
@@ -95,7 +95,7 @@ export default {
             url: '/login', method: 'post', propertyName: 'token'
           },
           user: {
-            url: '/me', method: 'get', propertyName: 'data'
+            url: '/me?token=', method: 'get', propertyName: 'data'
           },
           logout: {
             method: 'get',
