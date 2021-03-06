@@ -124,7 +124,7 @@
         <carousel :perPage="1" :paginationEnabled="false">
           <!-- <div> -->
             <slide v-for="materi in rawMateri" :key="materi.id">
-              <div class="materiContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + materi.thumbnail + ')'}" @click="addTask(materi.nama, materi.id, 'materi')">
+              <div class="materiContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: `url(${materi.thumbnail})`}" @click="addTask(materi.nama, materi.id, 'materi')">
                 <h1 class="carousel-title"> {{ materi.nama }} </h1>
               </div>
             </slide>
@@ -140,7 +140,7 @@
 
         <carousel :perPage="1" :paginationEnabled="false">
             <slide v-for="game in rawGames" :key="game.id">
-              <div class="latihanContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + game.thumbnail + ')'}" @click="addTask(game.nama, game.id, 'game')">
+              <div class="latihanContextMenu" :style="{ backgroundSize: 'cover', backgroundImage: `url(${game.thumbnail})`}" @click="addTask(game.nama, game.id, 'game')">
                 <h1 class="carousel-title"> {{ game.nama }} </h1>
               </div>
             </slide>
