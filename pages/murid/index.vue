@@ -146,7 +146,8 @@ export default {
           showCancelButton: true
         }).then((confirm) => {
           if (confirm) {
-            this.$router.push(resp.link)
+            console.log(resp.link)
+            this.$router.push(`/play/video?link=${resp.link}`)
           }
         })
       })
