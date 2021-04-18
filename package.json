@@ -16,12 +16,10 @@
     "core-js": "^3.6.5",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.14.6",
-    "nuxt-video-player": "^1.0.17",
     "vue-carousel": "^0.18.0",
     "vue-chartjs": "^3.5.1",
     "vue-session": "^1.0.0",
-    "vue-sweetalert2": "^4.2.0",
-    "vue-video-player": "^5.0.2"
+    "vue-sweetalert2": "^4.2.0"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

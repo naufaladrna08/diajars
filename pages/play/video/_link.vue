@@ -1,26 +1,19 @@
 <template>
 	<div id="root">
-		<video-player :src="link"/>
-		<!-- {{link}} -->
+
+		<video width="100%" height="100%" controls>
+			<source :src="link" type="video/mp4">
+		</video>
 
 	</div>
 </template>
 
 <script type="text/javascript">
-import VideoPlayer from 'nuxt-video-player'
-require('nuxt-video-player/src/assets/css/main.css')
-
 export default {
 	data() {
 		return {
 			link: "http://videos.diajars.online/" + this.$route.query.link
 		}
-	}, 
-	components: {
-  	VideoPlayer
-	},
-	mounted() {
-		console.log(this.link)
 	}
 }
 
