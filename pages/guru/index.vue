@@ -6,10 +6,10 @@
       </div>
       <div v-for="task in rawTugas" :key="task.id">
         <div v-if="task.tipe === 'game'">
-          <div class="task" @click="showTaskDetail(task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.tugasId, task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
         </div>  
         <div v-else>
-          <div class="task" @click="showTaskDetail(task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.tugasId, task.nama)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
         <p>Pekerjaan</p>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aau + ')'}" @click="onThemecardClick('Api,air, udara')">
-        <p>Api,air, udara</p>
+        <p>Api, air dan udara</p>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alatkomunikasi + ')'}" @click="onThemecardClick('Alat komunikasi')">
         <p>Alat komunikasi</p>
@@ -280,7 +280,6 @@ export default {
           jenisKelas: r1.jenisKelas
         })
         .then(function (resp) {
-          console.log(resp)
           self.rawMateri = resp
         })
       })
@@ -344,6 +343,7 @@ export default {
       .then((r1) => {
         const data = new FormData
         data.append('kodeKelas', this.kodeKelas)
+        data.append('guru', 1)
 
         this.$axios.$post('materi/lihat_tugas', data)
         .then((r) => {
@@ -351,14 +351,24 @@ export default {
         })
       })
     },
-    showTaskDetail(task) {
+    showTaskDetail(id, task) {
       this.$swal({
         title: "Detail Tugas",
         html: "<p> Anda menambahkan tugas <b> " + task + " </b> kepada siswa. </p>",
         showCloseButton: true,
         showCancelButton: true,
         cancelButtonText: "Hapus"
-      })
+      }).then((result) => {
+        if (!result.value) { 
+          const data = new FormData
+          data.append('tugasId', id)
+
+          this.$axios.$post('materi/hapus_tugas', data)
+          .then((response) => {
+            this.getTasks()
+          })
+        }
+      });
     }
   },
   created() {

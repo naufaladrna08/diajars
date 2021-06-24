@@ -4,39 +4,36 @@
       <!-- ᮊᮥᮓᮥᮔ ᮄᮄᮉ ᮒᮨᮂ ᮝᮧᮁᮊ᮪ -->
       <div v-for="task in tasks" :key="task.id">
         <div v-if="task.tipe === 'game'">
-          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.tugasId, task._tugasId, task.tipe, task.status)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.gameIcon + ')'}"></div>
         </div>  
         <div v-else>
-          <div class="task" @click="showTaskDetail(task.id, task.tipe)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
+          <div class="task" @click="showTaskDetail(task.tugasId, task._tugasId, task.tipe, task.status)" :style="{backgroundSize: 'cover', backgroundImage: 'url(' + images.materiIcon + ')'}"></div>
         </div>
       </div>
     </div>
 
     <div class="whitecard" :class="{taskbarOpen : taskbarIsOpen}">
       <i class="material-icons insight" @click="() => $router.push('/murid/statistik')">insights</i>
-      <h1 class="choosetheme">Pilih tema</h1>
+
+      <h1 class="choosetheme">Tema Semester 1</h1>
+
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.aku + ')'}" @click="onThemecardClick('Aku')">
         <p>Aku</p>
-        <span class="batch">Tugas baru</span>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.lingkunganku + ')'}" @click="onThemecardClick('Lingkunganku')">
         <p>Lingkunganku</p>
-        <span class="batch">Tugas baru</span>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.kebutuhanku + ')'}" @click="onThemecardClick('Kebutuhanku')">
         <p>Kebutuhanku</p>
-        <span class="batch">Tugas baru</span>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.binatang + ')'}" @click="onThemecardClick('Binatang')">
         <p>Binatang</p>
-        <span class="batch">Tugas baru</span>
       </div>
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.tanaman + ')'}" @click="onThemecardClick('Tanaman')">
         <p>Tanaman</p>
-        <span class="batch">Tugas baru</span>
       </div>
       <!-- //semester 2 -->
-      <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.rekreasi + ')'}" @click="onThemecardClick('Rekreasi')">
+      <!-- <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.rekreasi + ')'}" @click="onThemecardClick('Rekreasi')">
         <p>Rekreasi</p>
         <span class="batch">Tugas baru</span>
       </div>
@@ -63,7 +60,27 @@
       <div class="themecard" :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + images.alamsemesta + ')'}" @click="onThemecardClick('Alam semesta')">
         <p>Alam semesta</p>
         <span class="batch">Tugas baru</span>
-      </div>
+      </div> -->
+
+      <h1 class="choosetheme"> Tugas Siswa </h1>
+
+      <template v-for="task in tasks">
+        <div class="themecard" 
+            :style="{ backgroundSize: 'cover', backgroundImage: 'url(' + task.thumbnail + ')'}" 
+            @click="showTaskDetail(task.tugasId, task._tugasId, task.tipe, task.status)">
+          
+          <p class="toCapitalFirst"> {{ task.tipe + ": " + task.nama }} </p>
+
+          <span class="batch">
+            <div v-if="task.status === 0">
+              Belum Dikerjakan
+            </div>
+            <div v-else>
+              Sudah Dikerjakan
+            </div>
+          </span>
+        </div>
+      </template>
     </div>
 
     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="logout" @click="logout">
@@ -114,22 +131,20 @@ export default {
       .then((r1) => {
         const data = new FormData
         data.append('kodeKelas', r1.kodeKelas)
-
+        data.append('muridId', this.$auth.user.id)
+        
         this.$axios.$post('materi/lihat_tugas', data)
         .then((r2) => {
           this.tasks = r2
         })
       })
     },
-    showTaskDetail(id, type) {
-      /* 
-       * Dapatkan informasi tugas (deskripsi, link) 
-       */
-
+    showTaskDetail(id, _id, type, status) {
       // Dapatkan materi/game dari task id
       this.$axios.$post('materi/detail_tugas', {
         tugasId: id,
-        type: type
+        type: type,
+        uid: this.$auth.user.id
       }).then((resp) => {
         let tugas
         if (type == "materi") {
@@ -137,17 +152,39 @@ export default {
         } else {
           tugas = "Menyelesaikan permainan"
         }
-
-        console.log(id)
+        console.log(resp)
+        /* Jika tugas sudah dikerjakan, tampilkan nilai. */
+        let html = ``
+        if (status != 0) {
+          html =  `
+          <p style='text-align: left;'>
+            <h1> Hallo! </h1>
+            Kamu telah mengerjakan tugas: <br>
+            Judul Tugas: ${resp.nama} <br>
+            Jenis Tugas: ${type} <br>
+            Nilai: ${resp.nilai}
+          </p>`
+        } else {
+          html = `
+            <p style='text-align: left;'>
+            <h1> Hallo! </h1>
+            Kamu mempunyai tugas baru: <br>
+            Judul Tugas: ${resp.nama} <br>
+            Jenis Tugas: ${type}
+          </p>`
+        }
 
         this.$swal({
           title: "Detail Tugas",
-          html: "<p style='text-align: left'> Hi! <br><br> Kamu mempunya tugas baru: <br>  Tugas: " + tugas + " tentang " + resp.nama +"</p>",
+          html: html,
           showCancelButton: true
-        }).then((confirm) => {
-          if (confirm) {
-            console.log(resp.link)
-            this.$router.push(`/play/video?link=${resp.link}`)
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (type == "materi") {
+              this.$router.push(`/play/video?link=${resp.link}&tugas_id=${_id}`)
+            } else { 
+              this.$router.push(`/play/${resp.link}?tugas_id=${_id}`)
+            }
           }
         })
       })
@@ -196,33 +233,34 @@ export default {
     margin-left: auto;
     padding: 2rem;
     overflow: auto;
-    .themecard{
-      margin: auto;
-      width: 40%;
-      background: rgb(240, 230, 238);
-      height: 10rem;
-      margin-bottom: 3rem;
-      border-radius: 1rem;
-      position: relative;
-      .batch{
-        background: $red;
-        color: #fff;
-        border-radius: 100rem;
-        padding: .2rem .5rem;
-        font-size: .6rem;
-        position: absolute;
-        top: .5rem;
-        left: .5rem;
-      }
-      p{
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translatex(-50%);
-        color: #fff;
-        padding: 10px;
-        background: #222222AA;
-      }
+  }
+
+  .themecard{
+    margin: auto;
+    width: 40%;
+    background: rgb(240, 230, 238);
+    height: 10rem;
+    margin-bottom: 3rem;
+    border-radius: 1rem;
+    position: relative;
+    .batch{
+      background: $red;
+      color: #fff;
+      border-radius: 100rem;
+      padding: .2rem .5rem;
+      font-size: .6rem;
+      position: absolute;
+      top: .5rem;
+      left: .5rem;
+    }
+    p{
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translatex(-50%);
+      color: #fff;
+      padding: 10px;
+      background: #222222AA;
     }
   }
 
@@ -259,5 +297,9 @@ export default {
     bottom: 1rem;
     right: 1rem;
     color: #434343;
+  }
+
+  .toCapitalFirst {
+    text-transform: capitalize;
   }
 </style>
