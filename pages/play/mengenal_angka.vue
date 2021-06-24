@@ -25,7 +25,7 @@ export default {
       if (result.isConfirmed) {
         this.$swal.fire('Disimpan!', '', 'success')
 
-        document.location.href = 'http://localhost:3000/'
+        document.location.href = 'http://diajars.online/'
       }
     })
     }
