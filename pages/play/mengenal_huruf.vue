@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      link: "http://localhost/games/mengenal_huruf/index.html?id=" + this.$auth.user.id + "&tugas_id=" + this.$route.query.tugas_id
+      link: "http://games.diajars.online/mengenal_huruf/index.html?id=" + this.$auth.user.id + "&tugas_id=" + this.$route.query.tugas_id
     }
   },
   methods: {
