@@ -155,7 +155,7 @@ export default {
         console.log(resp)
         /* Jika tugas sudah dikerjakan, tampilkan nilai. */
         let html = ``
-        if (status != 0) {
+        if (status != 0 && type == "game") {
           html =  `
           <p style='text-align: left;'>
             <h1> Hallo! </h1>
@@ -163,6 +163,14 @@ export default {
             Judul Tugas: ${resp.nama} <br>
             Jenis Tugas: ${type} <br>
             Nilai: ${resp.nilai}
+          </p>`
+        } else if (status != 0 && type == "materi") {
+          html =  `
+          <p style='text-align: left;'>
+            <h1> Hallo! </h1>
+            Kamu telah mengerjakan tugas: <br>
+            Judul Tugas: ${resp.nama} <br>
+            Jenis Tugas: ${type}
           </p>`
         } else {
           html = `
