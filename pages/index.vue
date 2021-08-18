@@ -46,8 +46,8 @@ export default {
 	},
 	mounted() {
 		if (this.$auth.loggedIn == true) {
-			let type = this.$auth.user.jenisAkun
-			if (type == 'murid') {
+			let type = this.$auth.user.account_type
+			if (type == 'student') {
 				this.$router.push('/murid')
 			} else {
 				this.$router.push('/guru')
